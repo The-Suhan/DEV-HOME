@@ -1,0 +1,219 @@
+
+:root {
+    --primary-dark: #11101D;
+    --secondary-dark: #1d1b31;
+    --sidebar-white: #ffffff;
+    --transition: all 0.5s ease;
+}
+
+* {
+    margin: 0; padding: 0; box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+.sidebar {
+    position: fixed; left: 0; top: 0; height: 100%;
+    width: 78px; background: var(--primary-dark);
+    padding: 6px 14px; z-index: 99; transition: var(--transition);
+}
+.sidebar .bx-search {
+    z-index: 5; 
+}
+
+.sidebar.open { width: 250px; }
+
+.sidebar .logo-details {
+    height: 60px; display: flex; align-items: center; position: relative;
+}
+
+.sidebar .logo-details .logo_name {
+    color: var(--sidebar-white); font-size: 20px; font-weight: 600;
+    opacity: 0; transition: var(--transition);
+}
+
+.sidebar.open .logo-details .logo_name { opacity: 1; }
+
+.sidebar #btn {
+    position: absolute; top: 50%; right: 0; transform: translateY(-50%);
+    font-size: 22px; color: var(--sidebar-white); cursor: pointer; transition: var(--transition);
+}
+
+.sidebar i { color: var(--sidebar-white); height: 60px; min-width: 50px; font-size: 28px; line-height: 60px; text-align: center; }
+
+/* Home Section */
+.home-section {
+    position: relative; background: #E4E9F7; min-height: 100vh;
+    left: 78px; width: calc(100% - 78px); transition: var(--transition);
+}
+
+.sidebar.open ~ .home-section {
+    left: 250px; width: calc(100% - 250px);
+}
+
+/* Tooltip (Senin görselindeki gibi sağda çıkan kutucuklar) */
+.sidebar li .tooltip {
+    position: absolute; top: -20px; left: calc(100% + 15px);
+    background: var(--sidebar-white); box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+    padding: 6px 12px; border-radius: 4px; font-size: 15px;
+    opacity: 0; pointer-events: none; transition: 0s;
+}
+
+.sidebar li:hover .tooltip {
+    opacity: 1; top: 50%; transform: translateY(-50%); transition: all 0.4s ease;
+}
+
+.sidebar.open li .tooltip { display: none; }
+
+.sidebar li.profile {
+    position: fixed; height: 61; width: 78px;
+    left: 0; bottom: 8px; background: var(--secondary-dark);
+    transition: var(--transition); overflow: hidden; padding: 10px 14px;
+    position: fixed;
+    height: 80px;
+    width: 78px;
+    left: 0;
+    bottom: 50px; 
+    padding: 10px 14px;
+    background: #1d1b31;
+    transition: all 0.5s ease;
+    overflow: hidden;
+    z-index: 100;
+}
+
+.sidebar.open li.profile { width: 250px; }
+
+.sidebar li img { height: 45px; width: 45px; object-fit: cover; border-radius: 6px; }
+
+.sidebar #log_out {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    line-height: 60px;
+    width: 100%;
+    transition: all 0.5s ease;
+}
+.sidebar.open #log_out {
+    width: 50px; 
+    background: none;
+}
+.sidebar .name_job {
+    opacity: 0;
+    pointer-events: none;
+    white-space: nowrap;
+    transition: all 0.5s ease;
+}
+.sidebar.open .name_job {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.sidebar .profile #log_out {
+    position: absolute;
+    top: 50%;
+    right: 0; 
+    transform: translateY(-50%);
+    background: #1d1b31;
+    width: 100%; 
+    transition: all 0.5s ease;
+}
+.sidebar.open .profile #log_out {
+    width: 50px; 
+    background: none;
+}
+.sidebar li.profile {
+    position: fixed;
+    height: 75px; 
+    width: 78px;
+    left: 0;
+    bottom: 20px; 
+    background: #1d1b31;
+    transition: all 0.5s ease;
+    overflow: visible;
+}
+
+.sidebar:not(.open) .name_job {
+    display: none;
+}
+.sidebar.open li.profile {
+    width: 250px;
+    height: 80px;
+}
+.sidebar li.profile .profile-details {
+    display: flex;
+    align-items: center;
+    margin-top: 2px; 
+}
+.sidebar li img {
+    height: 45px;
+    width: 45px;
+    object-fit: cover; 
+    margin-right: 20px; 
+}
+
+.sidebar:not(.open) #log_out {
+    display: none;
+}
+
+
+.sidebar.open #log_out {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    display: block;
+    margin-left: 25px;
+}
+
+
+
+.sidebar:not(.open) #log_out {
+    opacity: 0;
+    pointer-events: none;
+}
+.sidebar:not(.open) .profile-details img {
+    margin: 0 auto;
+    display: block;
+}
+.sidebar.open #log_out {
+    opacity: 1;
+    pointer-events: auto;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    width: auto;
+}
+.sidebar .profile {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.sidebar li.profile .name_job {
+    margin-right: 15px; 
+    flex-grow: 1;
+}
+
+.sidebar.open #log_out {
+    position: absolute;
+    right: 15px; 
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 22px; 
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+.sidebar li.profile {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    overflow: visible; 
+}
+
+
+.sidebar:not(.open) #log_out {
+    display: none;
+}
