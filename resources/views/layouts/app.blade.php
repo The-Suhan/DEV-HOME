@@ -4,16 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DEV HOME </></title>
+    <title>DEV HOME </>
+    </title>
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/fancybox.css') }}">
     <link rel="stylesheet" href="{{ asset('css/aos.css') }}">
     <link rel="stylesheet" href="{{ asset('css/splide.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/auth-css.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/register.css') }}">
 
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('js/aos.js') }}"></script>
     <script src="{{ asset('js/fancybox.umd.js') }}"></script>
-    <script src="{{ asset('js/splide.min.js') }}"></script>   
+    <script src="{{ asset('js/splide.min.js') }}"></script>
 
     <link rel="stylesheet" href="{{ asset('css/icons/bootstrap-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('css/icons/fonts/bootstrap-icons.woff') }}">
@@ -22,10 +25,17 @@
     <script src="{{ asset('js/script.js') }}"></script>
 </head>
 
-<body>
-    @include('app.sidebar')
+<body style="background-color: #0C2935;">
+    
+    @auth
+        @include('app.sidebar')
+    @endauth
 
-    @yield('home-section')
+
+    <main class="{{ Auth::check() ? 'content-with-sidebar' : 'content-full-center' }}">
+        @yield('home-section')
+    </main>
 </body>
+
 
 </html>
