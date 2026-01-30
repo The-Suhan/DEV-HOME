@@ -18,23 +18,25 @@ class AuthController extends Controller
 
     public function showRegister()
     {
-        return view('auth.register'); 
+        return view('auth.register');
     }
 
- 
+
 
     public function register(Request $request)
     {
         $request->validate([
-            'username' => 'required|string|max:255|unique:users',
-            'email'    => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6',
+            'username' => 'required|unique:users',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6',
         ]);
 
         User::create([
             'username' => $request->username,
-            'email'    => $request->email,
+            'email' => $request->email,
             'password' => Hash::make($request->password),
+            'profile_image' => 'images/default.jpg',
+            'bio' => null,
         ]);
 
         return redirect()->route('login')->with('success', 'Welcome to our company');
@@ -43,13 +45,13 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'email'    => 'required|email',
+            'email' => 'required|email',
             'password' => 'required',
         ]);
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('dashboard'); 
+            return redirect()->intended(route('home'));
         }
 
         return back()->withErrors([

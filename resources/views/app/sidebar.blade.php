@@ -34,11 +34,7 @@
         </li>
         <li class="profile">
             <div class="profile-details ">
-                @if(Auth::user()->profile_image)
-                <img src="{{ asset('images/' . Auth::user()->profile_image) }}" alt="profileImg">
-                @else
-                <img src="{{ asset('images/default-profile.jpg') }}" alt="profileImg">
-                @endif
+                <img src="{{ asset(Auth::user()->profile_image) }}" alt="profileImg">
                 <div class="name_job">
                     <div class="name text-white">{{ Auth::user()->username ?? 'Misafir' }}</div>
                     <div class="job text-white">Web Developer</div>

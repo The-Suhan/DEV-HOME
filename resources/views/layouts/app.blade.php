@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('css/splide.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/auth-css.css') }}">
     <link rel="stylesheet" href="{{ asset('css/register.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
 
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('js/aos.js') }}"></script>
