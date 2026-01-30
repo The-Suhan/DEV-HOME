@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('content')
+@section('home-section')
     <div class="main-content">
         <div class="container-fluid">
             <div class="row mb-5 justify-content-center">
@@ -32,34 +32,11 @@
                                 <img src="{{ asset($repo->thumbnail ?? 'images/repoimg.jpg') }}" class="repo-img">
                             </div>
 
-                            <div class="like-section d-flex align-items-center">
-                                <div class="like-section d-flex align-items-center">
-                                    @php $liked = $repo->likes->where('user_id', auth()->id())->count() > 0; @endphp
-                                    <i class="bi bi-heart-fill {{ $liked ? 'like-active' : 'text-white' }}" id="mainLikeBtn"
-                                        onclick="toggleMainLike(this)"></i>
-                                    <span class="ms-2 fs-5" id="likeCount">{{ $repo->likes->count() }}</span>
-                                </div>    
-                                <i class="bi bi-chat-dots"></i>
-                            </div>
-
-                            <div class="comments-box">
-                                @foreach($repo->comments->where('parent_id', null)->take(2) as $comment)
-                                    <div class="mb-2">
-                                        <span class="c-user">{{ $comment->user->username }}:</span>
-                                        <span class="text-white-50">{{ $comment->comment_text }}</span>
-                                    </div>
-
-                                    @foreach($repo->comments->where('parent_id', $comment->id) as $reply)
-                                        <div class="reply-line mb-1">
-                                            <span class="c-user">{{ $reply->user->username }}:</span>
-                                            <span class="text-white-50">{{ $reply->comment_text }}</span>
-                                        </div>
-                                    @endforeach
-                                @endforeach
-                                <button class="btn btn-link btn-sm text-info p-0 mt-1"
-                                    style="text-decoration:none; font-size:11px;">
-                                    Show more comments...
-                                </button>
+                            <div class="icon-bar d-flex align-items-center mt-3">
+                                <i class="bi bi-heart-fill like-btn {{ ($repo->likes && $repo->likes->contains('user_id', auth()->id())) ? 'text-danger' : 'text-white' }}"
+                                    style="cursor: pointer;" data-id="{{ $repo->id }}">
+                                </i>
+                                <span class="ms-2 text-white-50 like-count-{{ $repo->id }}">{{ $repo->likes->count() }}</span>
                             </div>
 
                             <div class="mt-3">
@@ -76,21 +53,35 @@
         </div>
     </div>
 
-
     <script>
-        function toggleMainLike(el) {
-            let countEl = document.getElementById('likeCount');
-            let currentCount = parseInt(countEl.innerText);
+        document.addEventListener('DOMContentLoaded', function () {
+            const likeButtons = document.querySelectorAll('.like-btn');
 
-            if (el.classList.contains('text-white')) {
-                el.classList.remove('text-white');
-                el.classList.add('like-active');
-                countEl.innerText = currentCount + 1;
-            } else {
-                el.classList.remove('like-active');
-                el.classList.add('text-white');
-                countEl.innerText = currentCount - 1;
-            }
-        }
+            likeButtons.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const repoId = this.getAttribute('data-id');
+                    const countSpan = document.querySelector('.like-count-' + repoId);
+
+                    fetch("{{ route('like.toggle') }}", {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                        },
+                        body: JSON.stringify({ repository_id: repoId })
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.status === 'liked') {
+                                this.classList.replace('text-white', 'text-danger');
+                            } else {
+                                this.classList.replace('text-danger', 'text-white');
+                            }
+                            countSpan.innerText = data.count;
+                        })
+                        .catch(error => console.error('Hata:', error));
+                });
+            });
+        });
     </script>
 @endsection

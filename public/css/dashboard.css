@@ -11,6 +11,22 @@
     padding: 40px;
 }
 
+.text-danger {
+    color: #ff4d4d !important;
+}
+
+.text-white {
+    color: #ffffff !important;
+}
+
+.like-btn {
+    transition: transform 0.2s ease;
+}
+
+.like-btn:active {
+    transform: scale(1.2);
+}
+
 .search-container {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid var(--neon-blue);
@@ -131,4 +147,19 @@
 .like-active {
     color: #ff4d4d;
     filter: drop-shadow(0 0 8px #ff4d4d);
+}
+
+.text-danger {
+    color: #ff4d4d !important;
+    filter: drop-shadow(0 0 8px #ff4d4d);
+}
+
+.text-white {
+    color: #ffffff !important;
+    filter: none;
+}
+
+
+.like-btn {
+    transition: all 0.3s ease;
 }

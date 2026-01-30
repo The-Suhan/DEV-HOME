@@ -21,10 +21,41 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
-        'profile_image', 
+        'profile_image',
         'bio',
         'github_url',
     ];
+    public function totalLikes()
+    {
+
+        return $this->hasManyThrough(\App\Models\Like::class, \App\Models\Repository::class);
+    }
+
+   
+    public function followings()
+    {
+        return $this->hasMany(\App\Models\Subscription::class, 'follower_id');
+    }
+
+   
+    public function followers()
+    {
+        return $this->hasMany(\App\Models\Subscription::class, 'following_id');
+    }
+
+    public function isFollowing($userId)
+    {
+        return $this->followings()->where('following_id', $userId)->exists();
+    }
+
+
+
+
+
+
+
+
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -47,9 +78,5 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
-    }
-
-    public function comments() {
-        return $this->hasMany(Comment::class);
     }
 }

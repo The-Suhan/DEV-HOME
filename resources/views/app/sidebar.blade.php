@@ -12,7 +12,7 @@
             <span class="tooltip">Search</span>
         </li>
         <li>
-            <a href="#" class="text-decoration-none fw-bold text-white w-100">
+            <a href="{{ route("home") }}" class="text-decoration-none fw-bold text-white w-100">
                 <i class='bi bi-house'></i>
                 <span class="links_name">Home</span>
             </a>
@@ -28,9 +28,9 @@
         <li>
             <a href="#" class="text-decoration-none fw-bold text-white">
                 <i class='bi bi-gear'></i>
-                <span class="links_name">Setting</span>
+                <span class="links_name">profile</span>
             </a>
-            <span class="tooltip">Setting</span>
+            <span class="tooltip">profile</span>
         </li>
         <li class="profile">
             <div class="profile-details ">

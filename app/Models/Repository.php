@@ -16,15 +16,9 @@ class Repository extends Model
     {
         return $this->belongsTo(Admin::class);
     }
-
-    
-    public function comments()
-    {
-        return $this->belongsTo(Comment::class);
-    }
+   
     public function likes()
-    {
-        return $this->belongsTo(Like::class);
-    }
-    
+{
+    return $this->hasMany(Like::class);
+}
 }
