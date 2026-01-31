@@ -7,11 +7,6 @@
     </div>
     <ul class="nav-list p-0">
         <li>
-            <i class='bi bi-search'></i>
-            <input type="text" placeholder="Search..." class="form-control border-0 text-white shadow-none bg-white">
-            <span class="tooltip">Search</span>
-        </li>
-        <li>
             <a href="{{ route("home") }}" class="text-decoration-none fw-bold text-white w-100">
                 <i class='bi bi-house'></i>
                 <span class="links_name">Home</span>
@@ -19,14 +14,14 @@
             <span class="tooltip">Home</span>
         </li>
         <li>
-            <a href="#" class="text-decoration-none fw-bold text-white">
+            <a href="{{ route('users.index') }}" class="text-decoration-none fw-bold text-white">
                 <i class='bi bi-person'></i>
                 <span class="links_name">Users</span>
             </a>
             <span class="tooltip">Users</span>
         </li>
         <li>
-            <a href="#" class="text-decoration-none fw-bold text-white">
+            <a href="{{ route('profile.index') }}" class="text-decoration-none fw-bold text-white">
                 <i class='bi bi-gear'></i>
                 <span class="links_name">profile</span>
             </a>

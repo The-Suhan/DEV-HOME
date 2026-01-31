@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Repository extends Model
 {
-    use HasFactory ;
+    use HasFactory;
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -16,9 +16,9 @@ class Repository extends Model
     {
         return $this->belongsTo(Admin::class);
     }
-   
+
     public function likes()
-{
-    return $this->hasMany(Like::class);
-}
+    {
+        return $this->hasMany(Like::class);
+    }
 }

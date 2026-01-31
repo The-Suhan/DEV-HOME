@@ -27,25 +27,27 @@ class User extends Authenticatable
     ];
     public function totalLikes()
     {
-
-        return $this->hasManyThrough(\App\Models\Like::class, \App\Models\Repository::class);
+        return $this->hasManyThrough(Like::class, Repository::class);
     }
 
-   
+
     public function followings()
     {
-        return $this->hasMany(\App\Models\Subscription::class, 'follower_id');
+        return $this->hasMany(Subscription::class, 'follower_id');
     }
 
-   
     public function followers()
     {
-        return $this->hasMany(\App\Models\Subscription::class, 'following_id');
+        return $this->hasMany(Subscription::class, 'following_id');
     }
 
     public function isFollowing($userId)
     {
         return $this->followings()->where('following_id', $userId)->exists();
+    }
+    public function repositories()
+    {
+        return $this->hasMany(Repository::class);
     }
 
 
