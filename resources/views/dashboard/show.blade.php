@@ -50,6 +50,29 @@
             font-size: 0.75rem;
             color: #00f2fe;
         }
+
+        .neon-input {
+            background-color: rgba(0, 0, 0, 0.3) !important;
+         
+            border: 1px solid rgba(0, 242, 254, 0.5) !important;
+          
+            color: white !important;
+            
+            transition: all 0.3s ease;
+        }
+
+        .neon-input:focus {
+            background-color: rgba(0, 0, 0, 0.5) !important;
+            border-color: #00f2fe !important;
+            box-shadow: 0 0 10px rgba(0, 242, 254, 0.5) !important;
+            outline: none;
+        }
+
+       
+        .neon-input::placeholder {
+            color: rgba(255, 255, 255, 0.5) !important;
+            font-style: italic;
+        }
     </style>
 
     <div class="show-container">
@@ -80,6 +103,8 @@
             </div>
         </div>
 
+
+
         <div class="path-display">
             <div class="mb-2 text-white-50 small text-uppercase">Project Root Path:</div>
             <div class="path-text">
@@ -87,9 +112,32 @@
             </div>
         </div>
 
-        <div class="description-box mb-5">
+        <div class="description-box mb-3">
             <h4 style="color: #00f2fe;">About Project</h4>
             <p class="lead text-white-70" style="line-height: 1.8;">{{ $repo->description }}</p>
+        </div>
+
+        <div class="" style="max-width: 300px;">
+            <h3 style="color: #00f2fe;">Comments ({{ $repo->comments->count() }})</h3>
+
+            <form action="{{ route('comment.store', $repo->id) }}" method="POST" class="mb-4">
+                @csrf
+                <textarea name="content" class="form-control neon-input" rows="3" placeholder="Write a comment..."
+                    required></textarea>
+                <button type="submit" class="btn btn-info btn-sm mt-2 fw-bold">Post Comment</button>
+            </form>
+
+            @foreach($repo->comments as $comment)
+                <div class="neon-card p-3 mb-3" style="border-left: 3px solid #00f2fe;">
+                    <div class="d-flex align-items-center mb-2">
+                        <img src="{{ asset($comment->user->profile_image) }}"
+                            style="width: 30px; height: 30px; border-radius: 50%;">
+                        <strong class="ms-2 text-white">{{ $comment->user->username }}</strong>
+                        <small class="ms-auto text-white-50">{{ $comment->created_at->diffForHumans() }}</small>
+                    </div>
+                    <p class="text-white mb-0">{{ $comment->content }}</p>
+                </div>
+            @endforeach
         </div>
     </div>
 
@@ -111,11 +159,11 @@
                     .then(data => {
                         if (data.status === 'subscribed') {
                             this.innerText = '✓';
-                            this.style.background = '#ff4d4d'; // Takip edince kırmızı olsun
+                            this.style.background = '#ff4d4d';
                             this.style.boxShadow = '0 0 10px #ff4d4d';
                         } else {
                             this.innerText = '+';
-                            this.style.background = '#00f2fe'; // Geri maviye dönsün
+                            this.style.background = '#00f2fe'; 
                             this.style.boxShadow = 'none';
                         }
                     });

@@ -16,7 +16,7 @@ class AdminFactory extends Factory
      */
     public function definition(): array
     {
-        $AdminIdPool = [2, 3];
+        $AdminIdPool = [2];
         return [
             'user_id'=>fake()->unique()->randomElement($AdminIdPool),
         ];

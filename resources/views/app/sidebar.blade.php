@@ -27,12 +27,22 @@
             </a>
             <span class="tooltip">profile</span>
         </li>
+        @auth
+            @if(\App\Models\Admin::where('user_id', auth()->id())->exists())
+                <li>
+                    <a href="{{ route('admin.panel') }}" class="text-decoration-none fw-bold text-white">
+                        <i class="bi bi-shield-lock-fill fs-4"></i>
+                        <span class="ms-3 nav-text">Admin Panel</span>
+                    </a>
+                    <span class="tooltip">Admin Panel</span>
+                </li>
+            @endif
+        @endauth
         <li class="profile">
             <div class="profile-details ">
                 <img src="{{ asset(Auth::user()->profile_image) }}" alt="profileImg">
                 <div class="name_job">
                     <div class="name text-white">{{ Auth::user()->username ?? 'Misafir' }}</div>
-                    <div class="job text-white">Web Developer</div>
                 </div>
             </div>
             <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

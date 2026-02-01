@@ -10,12 +10,12 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('subscriptions', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('follower_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('following_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade'); 
+            $table->foreignId('repository_id')->constrained()->onDelete('cascade'); 
+            $table->text('content');
             $table->timestamps();
-            $table->unique(['follower_id', 'following_id']);
         });
     }
 
@@ -24,6 +24,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('subscriptions');
+        Schema::dropIfExists('comments');
     }
 };

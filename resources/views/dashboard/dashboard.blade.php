@@ -1,86 +1,88 @@
 @extends('layouts.app')
 
 @section('home-section')
-    <div class="main-content">
-        <div class="container-fluid">
-            <div class="row mb-5 justify-content-center">
-                <div class="col-md-6">
-                    <div class="search-container">
-                        <i class="bi bi-search text-info"></i>
-                        <input type="text" placeholder="Search for ideas...">
-                    </div>
-                </div>
+
+    <div class="dashboard-wrapper px-4 container-sm mt-2">
+        <div class="d-flex justify-content-between align-items-end mb-5">
+            <div>
+                <h1 class="display-5 fw-bold text-white mb-0">EXPLORE <span style="color: #00f2fe;">REPOS</span></h1>
+                <p class="text-white-50">Discover what the community is building today.</p>
             </div>
+            <div class="text-end">
+                <span class="badge rounded-pill bg-dark border border-info px-3 py-2">
+                    <i class="bi bi-cpu me-1"></i> {{ $repositories->count() }} Projects Online
+                </span>
+            </div>
+        </div>
 
-            <div class="row">
-                @foreach($repositories as $repo)
-                    <div class="col-xl-4 col-md-6 mb-4">
-                        <div class="neon-card">
-                            <div class="d-flex align-items-center">
-                                <div class="profile-wrap">
-                                    <img src="{{ asset($repo->user->profile_image) }}" class="user-img">
-                                    <button class="plus-btn">+</button>
-                                </div>
-                                <span class="ms-3 text-white fw-bold">{{ $repo->user->username }}</span>
-                            </div>
-
-                            <a href="{{ route('dashboard.show', $repo->id) }}" class="repo-title-link">
-                                {{ $repo->title }}
-                            </a>
-
-                            <div class="repo-frame">
-                                <img src="{{ asset($repo->thumbnail ?? 'images/repoimg.jpg') }}" class="repo-img">
-                            </div>
-
-                            <div class="icon-bar d-flex align-items-center mt-3">
-                                <i class="bi bi-heart-fill like-btn {{ ($repo->likes && $repo->likes->contains('user_id', auth()->id())) ? 'text-danger' : 'text-white' }}"
-                                    style="cursor: pointer;" data-id="{{ $repo->id }}">
-                                </i>
-                                <span class="ms-2 text-white-50 like-count-{{ $repo->id }}">{{ $repo->likes->count() }}</span>
-                            </div>
-
-                            <div class="mt-3">
-                                <p class="text-white-50 small mb-3">{{ Str::limit($repo->description, 80) }}</p>
-                                <a href="{{ route('dashboard.show', $repo->id) }}"
-                                    class="btn btn-outline-info btn-sm w-100 fw-bold">
-                                    View Project Details
-                                </a>
+        <div class="row g-4">
+            @foreach($repositories as $repo)
+                <div class="col-md-4 col-sm-6">
+                    <div class="neon-card h-100 d-flex flex-column"
+                        style="border-radius: 15px; overflow: hidden; background: rgba(13, 31, 45, 0.8);">
+                        <div class="repo-thumb" style="height: 180px; overflow: hidden; position: relative;">
+                            <img src="{{ asset($repo->thumbnail ?? 'images/default-repo.png') }}"
+                                class="w-100 h-100 object-fit-cover">
+                            <div class="repo-overlay d-flex align-items-center justify-content-center">
+                                <a href="{{ route('dashboard.show', $repo->id) }}" class="btn btn-info btn-sm fw-bold px-4">VIEW
+                                    CODE</a>
                             </div>
                         </div>
+
+                        <div class="p-4 d-flex flex-column flex-grow-1">
+                            <div class="d-flex align-items-center mb-2">
+                                <img src="{{ asset($repo->user->profile_image) }}" class="rounded-circle border border-info"
+                                    style="width: 25px; height: 25px;">
+                                <span class="ms-2 text-white-50 small">{{ $repo->user->username }}</span>
+                            </div>
+                            <h4 class="text-white fw-bold mb-2">{{ $repo->title }}</h4>
+                            <p class="text-white-50 small flex-grow-1">{{ Str::limit($repo->description, 80) }}</p>
+
+                            <div
+                                class="mt-3 pt-3 border-top border-secondary d-flex justify-content-between align-items-center">
+                                <div class="text-info small">
+                                    <button class="btn-like border-0 bg-transparent" data-id="{{ $repo->id }}"
+                                        style="cursor: pointer;">
+                                        <i class="bi {{ auth()->user() && $repo->isLikedBy(auth()->user()) ? 'bi-heart-fill text-danger' : 'bi-heart text-info' }} fs-4"
+                                            id="like-icon-{{ $repo->id }}"></i>
+                                        <span class="text-white ms-1"
+                                            id="like-count-{{ $repo->id }}">{{ $repo->likes->count() }}</span>
+                                    </button>
+                                    <i class="bi bi-chat-left-dots-fill ms-3 me-1"></i> {{ $repo->comments->count() }}
+                                </div>
+                                <small class="text-white-50">{{ $repo->created_at->diffForHumans() }}</small>
+                            </div>
+                        </div>
+                        <div class="repo-overlay d-flex align-items-center justify-content-center">
+                            <a href="{{ route('dashboard.show', $repo->id) }}" class="btn btn-info fw-bold px-4 py-2"
+                                style="box-shadow: 0 0 15px rgba(0, 242, 254, 0.5); border-radius: 8px;">
+                                <i class="bi bi-code-slash me-2"></i> VIEW PROJECT
+                            </a>
+                        </div>
                     </div>
-                @endforeach
-            </div>
+                </div>
+            @endforeach
         </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const likeButtons = document.querySelectorAll('.like-btn');
+        $('.btn-like').click(function () {
+            let repoId = $(this).data('id');
+            let icon = $('#like-icon-' + repoId);
+            let countSpan = $('#like-count-' + repoId);
 
-            likeButtons.forEach(btn => {
-                btn.addEventListener('click', function () {
-                    const repoId = this.getAttribute('data-id');
-                    const countSpan = document.querySelector('.like-count-' + repoId);
-
-                    fetch("{{ route('like.toggle') }}", {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                        },
-                        body: JSON.stringify({ repository_id: repoId })
-                    })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.status === 'liked') {
-                                this.classList.replace('text-white', 'text-danger');
-                            } else {
-                                this.classList.replace('text-danger', 'text-white');
-                            }
-                            countSpan.innerText = data.count;
-                        })
-                        .catch(error => console.error('Hata:', error));
-                });
+            $.ajax({
+                url: '/like/' + repoId,
+                type: 'POST',
+                data: { _token: '{{ csrf_token() }}' },
+                success: function (response) {
+                    if (response.status == 'liked') {
+                        icon.removeClass('bi-heart text-info').addClass('bi-heart-fill text-danger');
+                    } else {
+                        icon.removeClass('bi-heart-fill text-danger').addClass('bi-heart text-info');
+                    }
+                    countSpan.text(response.count);
+                }
             });
         });
     </script>

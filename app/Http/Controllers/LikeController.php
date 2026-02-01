@@ -2,25 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Like;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Repository;
+use Illuminate\Http\Request;
 
 class LikeController extends Controller
 {
-    public function toggleLike(Request $request)
+    public function toggle(Repository $repository)
     {
-        $repoId = $request->repository_id;
-        $userId = Auth::id();
-
-        $like = Like::where('user_id', $userId)->where('repository_id', $repoId)->first();
+        $user = auth()->user();
+        $like = $repository->likes()->where('user_id', $user->id)->first();
 
         if ($like) {
             $like->delete();
-            return response()->json(['status' => 'unliked', 'count' => Like::where('repository_id', $repoId)->count()]);
+            $status = 'unliked';
+        } else {
+            $repository->likes()->create(['user_id' => $user->id]);
+            $status = 'liked';
         }
 
-        Like::create(['user_id' => $userId, 'repository_id' => $repoId]);
-        return response()->json(['status' => 'liked', 'count' => Like::where('repository_id', $repoId)->count()]);
+        return response()->json([
+            'status' => $status,
+            'count' => $repository->likes()->count()
+        ]);
     }
 }

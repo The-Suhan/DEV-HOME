@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
-    
+
     public function index()
     {
         $user = Auth::user()->load(['repositories', 'followers', 'followings', 'totalLikes']);
@@ -23,7 +23,7 @@ class ProfileController extends Controller
         return view('profile.edit', compact('user'));
     }
 
-    
+
     public function destroy()
     {
         $user = Auth::user();
@@ -33,28 +33,59 @@ class ProfileController extends Controller
     }
 
     public function update(Request $request)
-{
-    $user = Auth::user();
-    
-    $request->validate([
-        'username' => 'required|string|max:255|unique:users,username,'.$user->id,
-        'bio' => 'nullable|string|max:500',
-        'github_url' => 'nullable|url',
-        'profile_image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-    ]);
+    {
+        $user = Auth::user();
 
-    $user->username = $request->username;
-    $user->bio = $request->bio;
-    $user->github_url = $request->github_url;
+        $request->validate([
+            'username' => 'required|string|max:255|unique:users,username,' . $user->id,
+            'bio' => 'nullable|string|max:500',
+            'github_url' => 'nullable|url',
+            'profile_image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
 
-    if ($request->hasFile('profile_image')) {
-        $imageName = time().'.'.$request->profile_image->extension();
-        $request->profile_image->move(public_path('images/profiles'), $imageName);
-        $user->profile_image = 'images/profiles/'.$imageName;
+        $user->username = $request->username;
+        $user->bio = $request->bio;
+        $user->github_url = $request->github_url;
+
+        if ($request->hasFile('profile_image')) {
+            $imageName = time() . '.' . $request->profile_image->extension();
+            $request->profile_image->move(public_path('images/profiles'), $imageName);
+            $user->profile_image = 'images/profiles/' . $imageName;
+        }
+
+        $user->save();
+
+        return redirect()->route('profile.index')->with('success', 'Profil başarıyla güncellendi!');
     }
 
-    $user->save();
+    public function createRepo()
+    {
+        return view('profile.create_repo');
+    }
 
-    return redirect()->route('profile.index')->with('success', 'Profil başarıyla güncellendi!');
-}
+    public function storeRepo(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'repo_path' => 'required|string',
+            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        $repo = new \App\Models\Repository();
+        $repo->user_id = auth()->id();
+        $repo->title = $request->title;
+        $repo->description = $request->description;
+        $repo->repo_path = $request->repo_path;
+
+        if ($request->hasFile('thumbnail')) {
+            $imageName = time() . '.' . $request->thumbnail->extension();
+            $request->thumbnail->move(public_path('images/repos'), $imageName);
+            $repo->thumbnail = 'images/repos/' . $imageName;
+        }
+
+        $repo->save();
+
+        return redirect()->route('profile.index')->with('success', 'Repo created successfully!');
+    }
 }

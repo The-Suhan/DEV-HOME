@@ -6,8 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Like extends Model
 {
-    public function repo()
-    {
-        return $this->hasMany(Like::class);
-    }
+    protected $fillable = ['user_id', 'repository_id'];
 }

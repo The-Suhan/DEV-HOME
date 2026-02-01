@@ -31,16 +31,19 @@ class User extends Authenticatable
     }
 
 
+    
+   
     public function followings()
     {
         return $this->hasMany(Subscription::class, 'follower_id');
     }
 
-    public function followers()
+       public function followers()
     {
         return $this->hasMany(Subscription::class, 'following_id');
     }
 
+    
     public function isFollowing($userId)
     {
         return $this->followings()->where('following_id', $userId)->exists();
@@ -74,11 +77,9 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+        'is_admin' => 'boolean',
+    ];
 }
