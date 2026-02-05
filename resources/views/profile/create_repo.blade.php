@@ -7,7 +7,6 @@
 
             <form action="{{ route('profile.storeRepo') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-
                 <div class="mb-3">
                     <label class="form-label h4" style="color: #00f2fe;">PROJECT TITLE</label>
                     <input type="text" name="title" class="form-control neon-input" placeholder="e.g. Instagram Clone"

@@ -88,4 +88,16 @@ class ProfileController extends Controller
 
         return redirect()->route('profile.index')->with('success', 'Repo created successfully!');
     }
+
+    public function destroyRepo(\App\Models\Repository $repo)
+    {
+
+        if (auth()->id() !== $repo->user_id) {
+            return back()->with('error', 'you can`t do it !');
+        }
+
+        $repo->delete();
+
+        return back()->with('success', 'Repository deleted succesfully');
+    }
 }

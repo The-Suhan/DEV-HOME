@@ -24,7 +24,6 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
     Route::get('/dashboard/{id}', [App\Http\Controllers\HomeController::class, 'show'])->name('dashboard.show');
 
     Route::post('/like/{repository}', [LikeController::class, 'toggle'])->name('like.toggle');
@@ -37,9 +36,13 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
     Route::get('/profile/create-repo', [ProfileController::class, 'createRepo'])->name('profile.createRepo');
     Route::post('/profile/create-repo', [ProfileController::class, 'storeRepo'])->name('profile.storeRepo');
+    Route::delete('/profile/repository/{repo}', [App\Http\Controllers\ProfileController::class, 'destroyRepo'])->name('profile.repo.destroy');
 
     Route::get('/admin/panel', [AdminController::class, 'index'])->name('admin.panel');
-    Route::delete('/admin/user/{user}', [AdminController::class, 'destroy'])->name('admin.user.delete');
+    Route::get('/admin/users', [AdminController::class, 'users'])->name('admin.users');
+    Route::get('/admin/repositories', [AdminController::class, 'repositories'])->name('admin.repositories');
+    Route::delete('/admin/user/{user}', [AdminController::class, 'destroyUser'])->name('admin.user.delete');
+    Route::delete('/admin/repository/{repo}', [AdminController::class, 'destroyRepo'])->name('admin.repo.delete');
 
     Route::post('/repository/{id}/comment', [CommentController::class, 'store'])->name('comment.store');
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Repository;
 use Illuminate\Http\Request;
+use App\Models\User as UserModel;
 
 class HomeController extends Controller
 {
@@ -18,6 +19,9 @@ class HomeController extends Controller
     {
         $repo = Repository::with(['user', 'likes'])->findOrFail($id);
 
-        return view('dashboard.show', compact('repo'));
+
+        $user = UserModel::with(['repositories', 'followers', 'followings', 'totalLikes'])->findOrFail($id);
+
+        return view('dashboard.show', compact('repo', 'user'));
     }
 }

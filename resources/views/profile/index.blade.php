@@ -87,10 +87,22 @@
                             </div>
                         </div>
                         <div class="repo-overlay d-flex align-items-center justify-content-center">
-                            <a href="{{ route('dashboard.show', $repo->id) }}" class="btn btn-info fw-bold px-4 py-2"
-                                style="box-shadow: 0 0 15px rgba(0, 242, 254, 0.5); border-radius: 8px;">
-                                <i class="bi bi-code-slash me-2"></i> VIEW PROJECT
-                            </a>
+                            <div class="mt-3">
+                                <a href="{{ route('dashboard.show', $repo->id) }}"
+                                    class="btn btn-info fw-bold px-4 py-2 w-100 mb-2"
+                                    style="box-shadow: 0 0 15px rgba(0, 242, 254, 0.5); border-radius: 8px;">
+                                    <i class="bi bi-code-slash me-2"></i> VIEW PROJECT
+                                </a>
+                                <form action="{{ route('profile.repo.destroy', $repo->id) }}" method="POST"
+                                    onsubmit="return confirm('Are you sure?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"
+                                        class="btn btn-link text-danger text-decoration-none btn-sm w-100 fw-bold">
+                                        <i class="bi bi-trash3 me-1"></i> Delete Repository
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

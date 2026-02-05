@@ -1,33 +1,37 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\User;
-use Illuminate\Http\Request;
+use App\Models\Repository;
 
 class AdminController extends Controller
 {
-    
-
     public function index()
     {
-        $isAdmin = \DB::table('admins')->where('user_id', auth()->id())->exists();
-
-        if (!$isAdmin) {
-            abort(403, 'Access denied !');
-        }
-
-        $users = User::where('id', '!=', auth()->id())->get();
-        return view('admin.panel', compact('users'));
+        return view('admin.panel');
     }
 
-    public function destroy(User $user)
+    public function users()
     {
-        if (!auth()->user()->is_admin) {
-            abort(403);
-        }
+        $users = User::all();
+        return view('admin.users', compact('users'));
+    }
 
+    public function repositories()
+    {
+        $repos = Repository::with('user')->get();
+        return view('admin.repositories', compact('repos'));
+    }
+
+    public function destroyUser(User $user)
+    {
         $user->delete();
-        return back()->with('success', 'User deleted.');
+        return back()->with('success', 'user deleted !');
+    }
+
+    public function destroyRepo(Repository $repo)
+    {
+        $repo->delete();
+        return back()->with('success', 'Repository deleted');
     }
 }

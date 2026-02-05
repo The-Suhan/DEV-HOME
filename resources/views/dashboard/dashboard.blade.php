@@ -64,26 +64,4 @@
             @endforeach
         </div>
     </div>
-
-    <script>
-        $('.btn-like').click(function () {
-            let repoId = $(this).data('id');
-            let icon = $('#like-icon-' + repoId);
-            let countSpan = $('#like-count-' + repoId);
-
-            $.ajax({
-                url: '/like/' + repoId,
-                type: 'POST',
-                data: { _token: '{{ csrf_token() }}' },
-                success: function (response) {
-                    if (response.status == 'liked') {
-                        icon.removeClass('bi-heart text-info').addClass('bi-heart-fill text-danger');
-                    } else {
-                        icon.removeClass('bi-heart-fill text-danger').addClass('bi-heart text-info');
-                    }
-                    countSpan.text(response.count);
-                }
-            });
-        });
-    </script>
 @endsection

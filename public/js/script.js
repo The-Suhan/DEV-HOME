@@ -1,4 +1,22 @@
 document.addEventListener("DOMContentLoaded", () => {
+    const dropBtn = document.querySelector("#drop-btn");
+    const navItem = document.querySelector(".nav-item");
+    const subMenu = document.querySelector(".sub-menu");
+
+    if (dropBtn) {
+        dropBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            navItem.classList.toggle("showMenu");
+
+            if (subMenu.style.display === "none" || subMenu.style.display === "") {
+                subMenu.style.display = "block";
+            } else {
+                subMenu.style.display = "none";
+            }
+        });
+    }
+});
+document.addEventListener("DOMContentLoaded", () => {
     const sidebar = document.querySelector(".sidebar");
     const closeBtn = document.querySelector("#btn");
     const searchBtn = document.querySelector(".bi-search");
@@ -23,6 +41,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-window.onload = function() {
-    menuBtnChange(); 
+window.onload = function () {
+    menuBtnChange();
 };
