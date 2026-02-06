@@ -9,6 +9,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\clientController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PostController;
 
 Route::post('/subscribe/toggle', [SubscriptionController::class, 'toggle'])->name('subscribe.toggle');
 
@@ -25,8 +26,9 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/dashboard/{id}', [App\Http\Controllers\HomeController::class, 'show'])->name('dashboard.show');
-
+    Route::post('/repository/{id}/comment', [CommentController::class, 'store'])->name('comment.store');
     Route::post('/like/{repository}', [LikeController::class, 'toggle'])->name('like.toggle');
+
 
 
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
@@ -44,9 +46,10 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/admin/user/{user}', [AdminController::class, 'destroyUser'])->name('admin.user.delete');
     Route::delete('/admin/repository/{repo}', [AdminController::class, 'destroyRepo'])->name('admin.repo.delete');
 
-    Route::post('/repository/{id}/comment', [CommentController::class, 'store'])->name('comment.store');
-
     Route::get('/users', [clientController::class, 'index'])->name('users.index');
     Route::get('/users/{id}', [clientController::class, 'show'])->name('users.show');
 
+    Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+    Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
+    Route::post('/like-post/{post}', [App\Http\Controllers\LikeController::class, 'togglePostLike'])->name('like.post');
 });

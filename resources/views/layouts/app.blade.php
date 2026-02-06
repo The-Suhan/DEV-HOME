@@ -46,15 +46,15 @@
     <script>
         $(document).ready(function () {
             $('#follow-btn').on('click', function (e) {
-                e.preventDefault(); 
+                e.preventDefault();
 
                 let userId = $(this).data('id');
                 let btn = $(this);
                 let countSpan = $('#follower-count');
 
                 $.ajax({
-                    url: '/subscribe/toggle', 
-                    type: 'POST', 
+                    url: '/subscribe/toggle',
+                    type: 'POST',
                     data: {
                         _token: '{{ csrf_token() }}',
                         user_id: userId
@@ -93,6 +93,34 @@
                     }
                     countSpan.text(response.count);
                 }
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $(document).on('click', '.post-like-btn', function (e) {
+                e.preventDefault(); 
+
+                let postId = $(this).data('id');
+                let icon = $('#like-icon-' + postId);
+                let countSpan = $('#like-count-' + postId);
+
+                $.ajax({
+                    url: '/like-post/' + postId,
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function (response) {
+                        if (response.status === 'liked') {
+                            icon.removeClass('bi-heart text-white').addClass('bi-heart-fill text-danger');
+                        } else {
+                            icon.removeClass('bi-heart-fill text-danger').addClass('bi-heart text-white');
+                        }
+                        countSpan.text(response.like_count);
+                    }
+                });
             });
         });
     </script>

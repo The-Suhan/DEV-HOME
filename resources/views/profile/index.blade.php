@@ -28,7 +28,7 @@
             <div class="col-md-8">
                 <div class="row text-center mt-5">
                     <div class="col-4">
-                        <h2 class="text-info">{{ $user->totalLikes->count() }}</h2>
+                        <h2 class="text-info">{{ $user->total_likes }}</h2>
                         <span class="text-white-50">Total Likes</span>
                     </div>
                     <div class="col-4">

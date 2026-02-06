@@ -9,7 +9,7 @@
                     style="width: 150px; height: 150px; border-radius: 50%; border: 3px solid #00f2fe; object-fit: cover;">
 
                 <div class="mt-3 text-white-50 small d-flex">
-                    <div>Total Likes: <span class="text-info">{{ $user->totalLikes->count() }}</span></div>
+                    <div>Total Likes: <span class="text-info">{{ $user->total_likes }}</span></div>
                     <div class="mx-3">Followers: <span class="text-info"
                             id="follower-count">{{ $user->followers->count() }}</span></div>
                     <div>Following: <span class="text-info">{{ $user->followings->count() }}</span></div>

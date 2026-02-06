@@ -8,26 +8,22 @@ return new class extends Migration {
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('likes', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('repository_id')->nullable()->constrained()->onDelete('cascade');
-
-            $table->foreignId('post_id')->nullable()->constrained('posts')->onDelete('cascade');
-
+            $table->string('media_path');
+            $table->enum('type', ['image', 'video']);
+            $table->text('caption')->nullable();
             $table->timestamps();
-
-            // $table->unique(['user_id', 'repository_id']); 
         });
     }
-
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('likes');
+        Schema::dropIfExists('posts');
     }
 };

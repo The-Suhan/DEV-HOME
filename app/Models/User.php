@@ -25,32 +25,47 @@ class User extends Authenticatable
         'bio',
         'github_url',
     ];
-    public function totalLikes()
+
+    public function getTotalLikesAttribute()
     {
-        return $this->hasManyThrough(Like::class, Repository::class);
+     
+        $repoIds = $this->repositories()->pluck('id');
+       
+        $postIds = $this->posts()->pluck('id');
+
+      
+        $repoLikesCount = \App\Models\Like::whereIn('repository_id', $repoIds)->count();
+        $postLikesCount = \App\Models\Like::whereIn('post_id', $postIds)->count();
+
+        return $repoLikesCount + $postLikesCount;
     }
 
 
-    
-   
     public function followings()
     {
         return $this->hasMany(Subscription::class, 'follower_id');
     }
 
-       public function followers()
+    public function followers()
     {
         return $this->hasMany(Subscription::class, 'following_id');
     }
 
-    
+
     public function isFollowing($userId)
     {
         return $this->followings()->where('following_id', $userId)->exists();
     }
+
+
     public function repositories()
     {
         return $this->hasMany(Repository::class);
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
     }
 
 

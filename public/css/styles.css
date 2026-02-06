@@ -11,6 +11,20 @@
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
 }
+.post-img-hover:hover {
+    transform: scale(1.05); 
+    filter: brightness(1.1); 
+    cursor: pointer;
+}
+
+.card.bg-dark {
+    transition: all 0.3s ease;
+}
+
+.card.bg-dark:hover {
+    border-color: #00f2fe !important; 
+    box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
+}
 
 .sidebar .links_name,
 .sidebar .logo_name {

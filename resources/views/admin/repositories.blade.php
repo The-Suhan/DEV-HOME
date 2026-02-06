@@ -21,7 +21,7 @@
                             <td>{{ $repo->created_at->format('d.m.Y') }}</td>
                             <td>
                                 <form action="{{ route('admin.repo.delete', $repo->id) }}" method="POST"
-                                    onsubmit="return confirm('Silinsin mi?')">
+                                    onsubmit="return confirm('Are you sure?')">
                                     @csrf @method('DELETE')
                                     <button class="btn btn-danger btn-sm">Delete</button>
                                 </form>

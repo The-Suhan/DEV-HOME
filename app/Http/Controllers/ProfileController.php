@@ -12,8 +12,11 @@ class ProfileController extends Controller
 
     public function index()
     {
-        $user = Auth::user()->load(['repositories', 'followers', 'followings', 'totalLikes']);
-        return view('profile.index', compact('user'));
+        $user = auth()->user();
+        
+        $user->load(['repositories', 'posts', 'followers', 'followings']);
+        
+       return view('profile.index', compact('user'));
     }
 
 

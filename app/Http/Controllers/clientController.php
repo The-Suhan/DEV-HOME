@@ -15,7 +15,7 @@ class clientController extends Controller
 
     public function show($id)    
     {        
-        $user = UserModel::with(['repositories', 'followers', 'followings', 'totalLikes'])->findOrFail($id);
+        $user = UserModel::with(['repositories', 'followers', 'followings','posts'])->findOrFail($id);
         return view('users.show', compact('user'));
     }
 }

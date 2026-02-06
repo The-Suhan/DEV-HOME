@@ -42,7 +42,9 @@
             <ul class="sub-menu list-unstyled ps-4 py-2" style="display: none; background: #1d1b31;">
                 <li><a href="{{ route("home") }}"
                         class="text-white-50 text-decoration-none py-1 d-block small">Repository</a></li>
-                <li><a href="#" class="text-white-50 text-decoration-none py-1 d-block small">E-Commerce</a></li>
+                <li><a href="{{ route("posts.index") }}"
+                        class="text-white-50 text-decoration-none py-1 d-block small">Posts</a>
+                </li>
             </ul>
         </li>
         </li>
@@ -50,7 +52,7 @@
             <div class="profile-details ">
                 <img src="{{ asset(Auth::user()->profile_image) }}" alt="profileImg">
                 <div class="name_job">
-                    <div class="name text-white">{{ Auth::user()->username ?? 'Misafir' }}</div>
+                    <div class="name text-white">{{ Auth::user()->username ?? 'Guest' }}</div>
                 </div>
             </div>
             <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
