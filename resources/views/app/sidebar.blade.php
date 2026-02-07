@@ -8,14 +8,14 @@
     <ul class="nav-list p-0">
         <li>
             <a href="{{ route('profile.index') }}" class="text-decoration-none fw-bold text-white">
-                <i class='bi bi-gear'></i>
+                <i class='bi bi-person-gear'></i>
                 <span class="links_name">profile</span>
             </a>
             <span class="tooltip">profile</span>
         </li>
         <li>
             <a href="{{ route('users.index') }}" class="text-decoration-none fw-bold text-white">
-                <i class='bi bi-person'></i>
+                <i class='bi bi-people'></i>
                 <span class="links_name">Users</span>
             </a>
             <span class="tooltip">Users</span>

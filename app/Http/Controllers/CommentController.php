@@ -7,16 +7,21 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    public function store(Request $request, $repoId)
+    public function store(Request $request, $id)
     {
-        $request->validate(['content' => 'required|max:500']);
-
-        Comment::create([
-            'user_id' => auth()->id(),
-            'repository_id' => $repoId,
-            'content' => $request->content
+        $request->validate([
+            'content' => 'required|max:500'
         ]);
 
-        return back()->with('success', 'Comment submitted');
+        \App\Models\Comment::create([
+            'user_id' => auth()->id(),
+            'content' => $request->content,
+        
+            'post_id' => $request->has('is_post') ? $id : null,
+            'repository_id' => $request->has('is_post') ? null : $id,
+        ]);
+
+        return back();
     }
 }
+

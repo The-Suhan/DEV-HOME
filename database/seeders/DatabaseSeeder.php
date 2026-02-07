@@ -22,9 +22,13 @@ class DatabaseSeeder extends Seeder
             RepositorySeeder::class,
         ]);
 
-      User::factory(10)->create();
+      User::factory(20)->create();
       Admin::factory(1)->create();
-      Repository::factory(10)->create();
-      Post::factory(10)->create();
+      Repository::factory(20)->create();
+      Post::factory(18)->create();
+
+       $this->call([
+            PostSeeder::class,
+        ]);
     }
 }

@@ -1,10 +1,35 @@
 @extends('layouts.app')
 
 @section('home-section')
-    <div class="container py-4">
-        <div class="row justify-content-center">
-            <div class="col-md-8 col-lg-6">
-                @foreach($posts as $post)
+    <div class="container-sm py-4">
+        <div class="">
+            <div class="d-flex justify-content-between align-items-end mb-5">
+                <div>
+                    <h1 class="display-5 fw-bold text-white mb-0">FOR YOU <span style="color: #00f2fe;">PAGE </span></h1>
+                    <p class="text-white-50">See what's happening in the world.</p>
+                </div>
+                <div class="text-end">
+                    <span class="badge rounded-pill bg-dark border border-info px-3 py-2">
+                        <i class="bi me-1"></i> {{ $posts->count() }} Posts Online
+                    </span>
+                </div>
+            </div>
+            <div class="row mb-4 justify-content-center">
+                <div class="col-md-8 col-lg-6">
+                    <div class="input-group shadow-lg">
+                        <span class="input-group-text bg-dark border-info text-info">
+                            <i class="bi bi-search"></i>
+                        </span>
+                        <input type="text" id="postIndexSearch"
+                            class="form-control bg-dark text-white border-info shadow-none"
+                            placeholder="Search posts by username or content...">
+                    </div>
+                </div>
+            </div>
+        </div>
+        @foreach($posts as $post)
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6">
                     <div class="card bg-dark text-white mb-4 border-secondary rounded-4 shadow">
                         <div class="card-header d-flex align-items-center justify-content-between bg-transparent border-0 py-3">
                             <div class="d-flex align-items-center">
@@ -38,7 +63,8 @@
                                         style="object-fit: cover; transition: transform 0.4s ease;">
                                 </div>
                             @else
-                                <video src="{{ asset($post->media_path) }}" class="w-100" controls></video>
+                                <video src="{{ asset($post->media_path) }}" class="w-100" controls
+                                    style="max-height: 80vh;"></video>
                             @endif
                         </div>
 
@@ -52,13 +78,35 @@
                                 <span class="text-white fw-bold" id="like-count-{{ $post->id }}">
                                     {{ $post->likes()->count() }}
                                 </span>
+                                <i class="bi bi-chat-left-dots-fill ms-3 me-1"></i> {{ $post->comments->count() }}
                             </div>
                             <p class="card-text"><span
                                     class="fw-bold me-2">{{ $post->user->username }}</span>{{ $post->caption }}</p>
                         </div>
                     </div>
-                @endforeach
+
+                </div>
             </div>
-        </div>
+        @endforeach
     </div>
+    <script>
+        document.getElementById('postIndexSearch').addEventListener('keyup', function () {
+            let searchTerm = this.value.toLowerCase();
+            let postRows = document.querySelectorAll('.row.justify-content-center');
+
+            postRows.forEach(row => {
+                let card = row.querySelector('.card');
+                if (card) {
+                    let username = card.querySelector('h6') ? card.querySelector('h6').innerText.toLowerCase() : '';
+                    let cardText = card.innerText.toLowerCase();
+
+                    if (username.includes(searchTerm) || cardText.includes(searchTerm)) {
+                        row.style.display = 'flex';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                }
+            });
+        });
+    </script>
 @endsection

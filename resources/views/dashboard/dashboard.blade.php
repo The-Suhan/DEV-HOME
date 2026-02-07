@@ -13,6 +13,18 @@
                     <i class="bi bi-cpu me-1"></i> {{ $repositories->count() }} Projects Online
                 </span>
             </div>
+            <div class="row mb-4">
+                <div class="col-md-8 mx-auto">
+                    <div class="input-group shadow-lg">
+                        <span class="input-group-text bg-dark border-info text-info">
+                            <i class="bi bi-search"></i>
+                        </span>
+                        <input type="text" id="dashboardRepoSearch"
+                            class="form-control bg-dark text-white border-info shadow-none"
+                            placeholder="Search repositories by title, description or owner...">
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="row g-4">
@@ -64,4 +76,22 @@
             @endforeach
         </div>
     </div>
+    <script>
+        document.getElementById('dashboardRepoSearch').addEventListener('keyup', function () {
+            let searchTerm = this.value.toLowerCase();
+            let repoCards = document.querySelectorAll('.col-md-4.col-sm-6');
+
+            repoCards.forEach(card => {
+                let title = card.querySelector('h4') ? card.querySelector('h4').innerText.toLowerCase() : '';
+                let description = card.querySelector('p') ? card.querySelector('p').innerText.toLowerCase() : '';
+                let owner = card.querySelector('span') ? card.querySelector('span').innerText.toLowerCase() : '';
+
+                if (title.includes(searchTerm) || description.includes(searchTerm) || owner.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
 @endsection

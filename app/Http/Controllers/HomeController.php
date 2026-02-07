@@ -20,7 +20,7 @@ class HomeController extends Controller
         $repo = Repository::with(['user', 'likes'])->findOrFail($id);
 
 
-        $user = UserModel::with(['repositories', 'followers', 'followings', 'totalLikes'])->findOrFail($id);
+        $user = UserModel::with(['repositories', 'followers', 'followings',])->findOrFail($id);
 
         return view('dashboard.show', compact('repo', 'user'));
     }

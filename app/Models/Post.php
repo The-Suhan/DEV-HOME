@@ -8,6 +8,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Post extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'user_id',
+        'media_path',
+        'type',
+        'caption',
+    ];
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
@@ -15,5 +22,9 @@ class Post extends Model
     public function likes()
     {
         return $this->hasMany(Like::class, 'post_id');
+    }
+    public function comments()
+    {
+        return $this->hasMany(\App\Models\Comment::class);
     }
 }

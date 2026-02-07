@@ -13,10 +13,41 @@ class ProfileController extends Controller
     public function index()
     {
         $user = auth()->user();
-        
-        $user->load(['repositories', 'posts', 'followers', 'followings']);
-        
-       return view('profile.index', compact('user'));
+        $repositories = $user->repositories()->latest()->get();
+        $posts = \App\Models\Post::where('user_id', $user->id)->latest()->get();
+
+        return view('profile.index', compact('user', 'repositories', 'posts'));
+    }
+
+    public function followers(\App\Models\User $user)
+    {
+        $list = $user->followers()->with('follower')->get();
+        $type = 'Followers';
+        return view('profile.follow_list', compact('user', 'list', 'type'));
+    }
+
+    public function following(\App\Models\User $user)
+    {
+        $list = $user->followings()->with('following')->get();
+        $type = 'Following';
+        return view('profile.follow_list', compact('user', 'list', 'type'));
+    }
+
+    public function destroyFollow(\App\Models\Subscription $subscription)
+    {
+        $subscription->delete();
+        return back()->with('success', 'Removed!');
+    }
+    public function follow(\App\Models\User $user)
+    {
+        auth()->user()->followings()->create(['following_id' => $user->id]);
+        return back();
+    }
+
+    public function unfollow(\App\Models\User $user)
+    {
+        auth()->user()->followings()->where('following_id', $user->id)->delete();
+        return back();
     }
 
 

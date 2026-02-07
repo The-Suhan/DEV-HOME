@@ -34,4 +34,15 @@ class AdminController extends Controller
         $repo->delete();
         return back()->with('success', 'Repository deleted');
     }
+    public function posts()
+    {
+        $posts = \App\Models\Post::with('user')->latest()->get();
+        return view('admin.posts', compact('posts'));
+    }
+
+    public function destroyPost(\App\Models\Post $post)
+    {
+        $post->delete();
+        return back()->with('success', 'Post deleted succesfully!');
+    }
 }

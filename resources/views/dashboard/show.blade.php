@@ -86,7 +86,7 @@
                     <h2 style="color: #00f2fe; margin: 0;">{{ $repo->title }}</h2>
                     <div class="d-flex align-items-center">
                         <span class="text-white-50 me-2">by {{ $repo->user->username }}</span>
-                        <span class="user-stats">Total Likes: {{ $repo->user->totalLikes->count() }}</span>
+                        <span class="user-stats">Total Likes: {{ $repo->user->totalLikes }}</span>
                     </div>
                 </div>
                 <div style="position: relative;" class="ms-4">
@@ -97,6 +97,14 @@
                             {{ auth()->user()->isFollowing($user->id) ? 'Unfollow' : 'Follow' }}
                         </button>
                     @endif
+                </div>
+                <div style="position: relative;" class="ms-4">
+                    <a href="{{ route('home') }}"
+                        class="btn btn-outline-info d-inline-flex align-items-center gap-2 shadow-sm"
+                        style="border-radius: 20px; padding: 8px 20px;">
+                        <i class="bi bi-arrow-left"></i>
+                        <span>Back to</span>
+                    </a>
                 </div>
             </div>
             <div>
@@ -113,7 +121,7 @@
         <div class="path-display">
             <div class="mb-2 text-white-50 small text-uppercase">Project Root Path:</div>
             <div class="path-text">
-                <i class="bi bi-folder2-open me-2"></i> {{ asset($repo->repo_path) }}
+                <i class="bi bi-folder2-open me-2"></i><a href=" {{ asset($repo->repo_path) }}" target="_blank">{{ $repo->repo_path }}</a>
             </div>
         </div>
 
@@ -134,7 +142,7 @@
 
             @foreach($repo->comments as $comment)
                 <div class="neon-card p-3 mb-3" style="border-left: 3px solid #00f2fe;">
-                    <a href="{{ route('users.show', $user->id) }}" class="">
+                    <a href="{{ route('users.show', $user->id) }}" class="text-decoration-none">
                         <div class="d-flex align-items-center mb-2">
                             <img src="{{ asset($comment->user->profile_image) }}"
                                 style="width: 30px; height: 30px; border-radius: 50%;">

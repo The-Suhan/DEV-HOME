@@ -28,12 +28,12 @@ class User extends Authenticatable
 
     public function getTotalLikesAttribute()
     {
-     
+
         $repoIds = $this->repositories()->pluck('id');
-       
+
         $postIds = $this->posts()->pluck('id');
 
-      
+
         $repoLikesCount = \App\Models\Like::whereIn('repository_id', $repoIds)->count();
         $postLikesCount = \App\Models\Like::whereIn('post_id', $postIds)->count();
 

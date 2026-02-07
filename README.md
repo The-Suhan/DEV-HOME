@@ -6,7 +6,7 @@ DEV HOME - this is a community for IT developers. Here you can work on your own 
 
 Created by : Suxan
 
-- [Email link :](http://suxanoff17@gmail.com/).
-- [Telegram link :](https://t.me/B_Suhan).
-- [Tik Tok link :](https://tiktok.com/@suhan_09.06).
-- [Instagram link :](https://www.instagram.com/suhan_09.06?igsh=NmViMDI1ejduamZ2).
+- Email link : [http://suxanoff17@gmail.com/](http://suxanoff17@gmail.com/)
+- Telegram link : [https://t.me/B_Suhan](https://t.me/B_Suhan)
+- Tik Tok link : [https://tiktok.com/@suhan_09.06](https://tiktok.com/@suhan_09.06)
+- Instagram link : [https://www.instagram.com/suhan_09.06?igsh=NmViMDI1ejduamZ2](https://www.instagram.com/suhan_09.06?igsh=NmViMDI1ejduamZ2)
