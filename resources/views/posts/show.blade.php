@@ -3,11 +3,17 @@
 @section('home-section')
     <div class="container pb-5">
         <div class="ms-4 mt-3 mb-3">
-            <a href="{{ route('posts.index') }}" class="btn btn-outline-info d-inline-flex align-items-center gap-2 shadow-sm"
+            <a href="{{ route('posts.index') }}"
+                class="btn btn-outline-info d-inline-flex align-items-center gap-2 shadow-sm"
                 style="border-radius: 20px; padding: 8px 20px;">
                 <i class="bi bi-arrow-left"></i>
                 <span>Back to</span>
             </a>
+            <button type="button" class="ms-5 btn btn-lg btn-outline-danger shadow-sm" data-bs-toggle="modal"
+                data-bs-target="#reportModal" data-type="post" data-id="{{ $post->id }}"
+                style="border-radius: 20px;">
+                <i class="fas fa-flag"></i> Report Post
+            </button>
         </div>
         <div class="row g-0 bg-dark rounded-4 shadow-lg overflow-hidden border border-secondary">
             <div class="col-lg-8 bg-black d-flex align-items-center justify-content-center" style="min-height: 500px;">
@@ -35,6 +41,18 @@
                             {{ auth()->user()->isFollowing($post->user_id) ? 'Following' : 'Follow' }}
                         </button>
                     @endif
+                    @auth
+                        @if(auth()->user()->id === $post->user_id)
+                            <form action="{{ route('posts.destroy', $post->id) }}" method="POST"
+                                onsubmit="return confirm('Are you sure?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-outline-danger btn-sm">
+                                    <i class="fas fa-trash"></i> Delete
+                                </button>
+                            </form>
+                        @endif
+                    @endauth
                 </div>
 
                 <div class="p-3 flex-grow-1 overflow-auto" style="max-height: 400px;">

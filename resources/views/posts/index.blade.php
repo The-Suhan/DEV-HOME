@@ -45,6 +45,18 @@
                                     style="box-shadow: 0 0 15px rgba(0, 242, 254, 0.5); border-radius: 8px;">
                                     <i class="bi bi-code-slash me-2"></i> VIEW POST
                                 </a>
+                                @auth
+                                    @if(auth()->user()->id === $post->user_id)
+                                        <form action="{{ route('posts.destroy', $post->id) }}" method="POST"
+                                            onsubmit="return confirm('Are you sure?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-outline-danger ms-5 px-3 py-2">
+                                                <i class="fas fa-trash"></i> Delete
+                                            </button>
+                                        </form>
+                                    @endif
+                                @endauth
                             </div>
 
                             @if(auth()->id() !== $post->user_id)
@@ -79,6 +91,10 @@
                                     {{ $post->likes()->count() }}
                                 </span>
                                 <i class="bi bi-chat-left-dots-fill ms-3 me-1"></i> {{ $post->comments->count() }}
+                                <button type="button" class="ms-4 btn btn-sm btn-outline-danger shadow-sm" data-bs-toggle="modal"
+                                    data-bs-target="#reportModal" data-type="post" data-id="{{ $post->id }}">
+                                    <i class="fas fa-flag"></i> Report Post
+                                </button>
                             </div>
                             <p class="card-text"><span
                                     class="fw-bold me-2">{{ $post->user->username }}</span>{{ $post->caption }}</p>

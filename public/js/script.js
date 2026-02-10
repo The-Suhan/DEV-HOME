@@ -44,3 +44,16 @@ document.addEventListener("DOMContentLoaded", () => {
 window.onload = function () {
     menuBtnChange();
 };
+
+document.addEventListener('DOMContentLoaded', () => {
+    const reportModal = document.getElementById('reportModal');
+    reportModal.addEventListener('show.bs.modal', function (event) {
+        const button = event.relatedTarget;
+        const id = button.getAttribute('data-id');
+        const type = button.getAttribute('data-type');
+
+        document.getElementById('modal-reportable-id').value = id;
+        document.getElementById('modal-reportable-type').value = type;
+        document.getElementById('report-type-text').textContent = type;
+    });
+});

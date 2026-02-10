@@ -73,7 +73,7 @@
                             <span class="text-white-50">Followers</span>
                         </div>
                     </a>
-                    <a href="{{ route('profile.following', $user->id) }}" class="text-decoration-none col-4" >
+                    <a href="{{ route('profile.following', $user->id) }}" class="text-decoration-none col-4">
                         <div>
                             <h2 class="text-info">{{ $user->followings->count() }}</h2>
                             <span class="text-white-50">Following</span>
@@ -145,7 +145,7 @@
                                         style="box-shadow: 0 0 15px rgba(0, 242, 254, 0.5); border-radius: 8px;">
                                         <i class="bi bi-code-slash me-2"></i> VIEW PROJECT
                                     </a>
-                                    <form action="{{ route('profile.repo.destroy', $repo->id) }}" method="POST"
+                                    <form action="{{ route('admin.repo.delete', $repo->id) }}" method="POST"
                                         onsubmit="return confirm('Are you sure?');">
                                         @csrf
                                         @method('DELETE')
@@ -184,6 +184,18 @@
                                         style="box-shadow: 0 0 15px rgba(0, 242, 254, 0.5); border-radius: 8px;">
                                         <i class="bi bi-code-slash me-2"></i> VIEW POST
                                     </a>
+                                    @auth
+                                        @if(auth()->user()->id === $post->user_id)
+                                            <form action="{{ route('posts.destroy', $post->id) }}" method="POST"
+                                                onsubmit="return confirm('Are you sure?');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-outline-danger ms-5 px-3 py-2">
+                                                    <i class="fas fa-trash"></i> Delete
+                                                </button>
+                                            </form>
+                                        @endif
+                                    @endauth
                                 </div>
 
                                 @if(auth()->id() !== $post->user_id)

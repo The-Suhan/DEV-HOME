@@ -49,6 +49,10 @@
                             </div>
                             <h4 class="text-white fw-bold mb-2">{{ $repo->title }}</h4>
                             <p class="text-white-50 small flex-grow-1">{{ Str::limit($repo->description, 80) }}</p>
+                            <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal"
+                                data-bs-target="#reportModal" data-type="repository" data-id="{{ $repo->id }}">
+                                <i class="fas fa-biohazard"></i> Report Repository
+                            </button>
 
                             <div
                                 class="mt-3 pt-3 border-top border-secondary d-flex justify-content-between align-items-center">

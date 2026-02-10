@@ -42,15 +42,15 @@
 
                 <div class="mt-3 text-white-50 small d-flex">
                     <div>Total Likes: <span class="text-info">{{ $user->total_likes }}</span></div>
-                    <a href="{{ route('profile.followers', $user->id) }}" class="text-decoration-none mx-3">
-                        <div class="mx-3">
+                    <a href="{{ route('profile.followers', $user->id) }}" class="mx-3 text-decoration-none">
+                        <div class="mx-3 text-white-50">
                             <div class="mx-3">Followers: <span class="text-info"
                                     id="follower-count">{{ $user->followers->count() }}</span></div>
                         </div>
                     </a>
 
                     <a href="{{ route('profile.following', $user->id) }}" class="text-decoration-none">
-                        <div class="">
+                        <div class="text-white-50">
                             <div>Following: <span class="text-info">{{ $user->followings->count() }}</span></div>
                         </div>
                     </a>
@@ -69,6 +69,10 @@
                     {{ auth()->user()->isFollowing($user->id) ? 'Unfollow' : 'Follow' }}
                 </button>
             @endif
+            <button type="button" class="btn btn-danger fw-bold px-3 ms-3" data-bs-toggle="modal"
+                data-bs-target="#reportModal" data-type="user" data-id="{{ $user->id }}">
+                <i class="fas fa-user-slash"></i> Report User
+            </button>
         </div>
 
         <div class="d-flex justify-content-center border-top border-secondary mt-5">
@@ -133,7 +137,7 @@
                                         style="box-shadow: 0 0 15px rgba(0, 242, 254, 0.5); border-radius: 8px;">
                                         <i class="bi bi-code-slash me-2"></i> VIEW PROJECT
                                     </a>
-                                    <form action="{{ route('profile.repo.destroy', $repo->id) }}" method="POST"
+                                    <form action="{{ route('admin.repo.delete', $repo->id) }}" method="POST"
                                         onsubmit="return confirm('Are you sure?');">
                                         @csrf
                                         @method('DELETE')

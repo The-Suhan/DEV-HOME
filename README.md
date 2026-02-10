@@ -1,6 +1,7 @@
 ## About Project
 
-DEV HOME - this is a community for IT developers. Here you can work on your own projects or help others with theirs. It's not just about projects; it's also a social environment.
+  DEV HOME - this is a community for IT developers. Here you can work on your own projects or help others with theirs. It's not just about projects; it's also a social environments where you can share your knowledge, learn from others, and grow together. Whether you'beginner or an experienced developer, DEV HOME is the place to be for anyone passionate acoding and technology.
+
 
 ## About Creator
 

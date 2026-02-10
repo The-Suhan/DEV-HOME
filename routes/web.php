@@ -11,6 +11,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\ReportController;
 
 Route::post('/subscribe/toggle', [SubscriptionController::class, 'toggle'])->name('subscribe.toggle');
 
@@ -37,11 +38,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::delete('/profile/delete', [ProfileController::class, 'destroy'])->name('profile.delete');
     Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
-    Route::get('/profile/create-repo', [ProfileController::class, 'createRepo'])->name('profile.createRepo');
-    Route::post('/profile/create-repo', [ProfileController::class, 'storeRepo'])->name('profile.storeRepo');
+    Route::get('/profile/create-repo', [App\Http\Controllers\HomeController::class, 'createRepo'])->name('profile.createRepo');
+    Route::post('/profile/create-repo', [App\Http\Controllers\HomeController::class, 'storeRepo'])->name('profile.storeRepo');
     Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
     Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
-    Route::delete('/profile/repository/{repo}', [App\Http\Controllers\ProfileController::class, 'destroyRepo'])->name('profile.repo.destroy');
+    Route::delete('/profile/repository/{repo}', [AdminController::class, 'destroyRepo'])->name('admin.repo.delete');
     Route::get('/profile/{user}/followers', [ProfileController::class, 'followers'])->name('profile.followers');
     Route::get('/profile/{user}/following', [ProfileController::class, 'following'])->name('profile.following');
     Route::delete('/profile/follow/{subscription}', [ProfileController::class, 'destroyFollow'])->name('profile.deleteFollow');
@@ -56,11 +57,24 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/posts', [App\Http\Controllers\AdminController::class, 'posts'])->name('admin.posts');
     Route::delete('/admin/posts/{post}', [App\Http\Controllers\AdminController::class, 'destroyPost'])->name('admin.post.delete');
 
+
+    Route::get('/reports', [ReportController::class, 'index'])->name('admin.reports.index');
+    Route::get('/reports/users', [ReportController::class, 'users'])->name('admin.reports.users');
+    Route::get('/reports/posts', [ReportController::class, 'posts'])->name('admin.reports.posts');
+    Route::get('/reports/repositories', [ReportController::class, 'repositories'])->name('admin.reports.repositories');
+    Route::delete('/reports/{id}', [ReportController::class, 'destroy'])->name('admin.reports.destroy');
+    Route::post('/reports/store', [App\Http\Controllers\ReportController::class, 'store'])->name('reports.store')->middleware('auth');
+
+
+
     Route::get('/users', [clientController::class, 'index'])->name('users.index');
     Route::get('/users/{id}', [clientController::class, 'show'])->name('users.show');
+
+
 
     Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
     Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
     Route::post('/like-post/{post}', [App\Http\Controllers\LikeController::class, 'togglePostLike'])->name('like.post');
     Route::post('/post/{post}/comment', [App\Http\Controllers\CommentController::class, 'store'])->name('comments.store');
+    Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 });

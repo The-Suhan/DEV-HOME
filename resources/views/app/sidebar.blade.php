@@ -1,8 +1,10 @@
 <div class="sidebar">
     <div class="logo-details">
-        <div class="logo_name ms-2">DEV HOME
-            < />
-        </div>
+        <a href="{{ route('about_us') }}" class="text-decoration-none fw-bold text-white">
+            <div class="logo_name ms-2">DEV HOME
+                < />
+            </div>
+        </a>
         <i class='bi bi-list' id="btn"></i>
     </div>
     <ul class="nav-list p-0">

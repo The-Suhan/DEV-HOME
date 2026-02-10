@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use App\Models\Post;
 
@@ -28,7 +29,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'media' => 'required|file|max:20000', 
+            'media' => 'required|file|max:20000',
             'type' => 'required|in:image,video',
             'caption' => 'nullable|string|max:1000',
         ]);
@@ -37,7 +38,7 @@ class PostController extends Controller
             $file = $request->file('media');
             $fileName = time() . '.' . $file->getClientOriginalExtension();
 
-            $folder = ($request->type === 'video') ? 'videos' : 'images';
+            $folder = ($request->type === 'video') ? 'videos' : 'postIMG';
             $file->move(public_path($folder), $fileName);
             $path = $folder . '/' . $fileName;
 
@@ -50,5 +51,15 @@ class PostController extends Controller
 
             return redirect()->route('profile.index')->with('success', 'Post shared!');
         }
+    }
+    public function destroy(Post $post)
+    {
+        if (auth()->user()->id !== $post->user_id) {
+            return redirect()->back()->with('error', 'You can`t delete different posts!');
+        }
+
+        $post->delete();
+
+        return redirect()->route('posts.index')->with('success', 'Post deleted succesfully');
     }
 }

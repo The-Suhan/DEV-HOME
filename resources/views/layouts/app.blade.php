@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="{{ asset('css/icons/fonts/bootstrap-icons.woff') }}">
 
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
     <script src="{{ asset('js/script.js') }}"></script>
 </head>
 
@@ -38,6 +39,42 @@
     <main class="{{ Auth::check() ? 'content-with-sidebar' : 'content-full-center' }}">
         @yield('home-section')
     </main>
+
+    <div class="modal fade text-white" id="reportModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content bg-dark border-secondary">
+                <form action="{{ route('reports.store') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="reportable_id" id="modal-reportable-id">
+                    <input type="hidden" name="reportable_type" id="modal-reportable-type">
+
+                    <div class="modal-header border-secondary">
+                        <h5 class="modal-title text-warning"><i class="fas fa-exclamation-triangle"></i> Submit a Report
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="small text-muted">Please select the reason for reporting this <span
+                                id="report-type-text">content</span>:</p>
+                        <select name="reason" class="form-select bg-secondary text-white border-0 mb-3" required>
+                            <option value="">Choose a reason...</option>
+                            <option value="Spam">Spam</option>
+                            <option value="Inappropriate Content">Inappropriate Content</option>
+                            <option value="Harassment">Harassment</option>
+                            <option value="Copyright Violation">Copyright Violation</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <textarea name="description" class="form-control bg-secondary text-white border-0"
+                            placeholder="Optional details..." rows="3"></textarea>
+                    </div>
+                    <div class="modal-footer border-secondary">
+                        <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-warning text-dark fw-bold">Send Report</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
 
 
@@ -100,7 +137,7 @@
     <script>
         $(document).ready(function () {
             $(document).on('click', '.post-like-btn', function (e) {
-                e.preventDefault(); 
+                e.preventDefault();
 
                 let postId = $(this).data('id');
                 let icon = $('#like-icon-' + postId);

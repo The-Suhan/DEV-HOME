@@ -92,46 +92,6 @@ class ProfileController extends Controller
         return redirect()->route('profile.index')->with('success', 'Profil başarıyla güncellendi!');
     }
 
-    public function createRepo()
-    {
-        return view('profile.create_repo');
-    }
 
-    public function storeRepo(Request $request)
-    {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'repo_path' => 'required|string',
-            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-        ]);
 
-        $repo = new \App\Models\Repository();
-        $repo->user_id = auth()->id();
-        $repo->title = $request->title;
-        $repo->description = $request->description;
-        $repo->repo_path = $request->repo_path;
-
-        if ($request->hasFile('thumbnail')) {
-            $imageName = time() . '.' . $request->thumbnail->extension();
-            $request->thumbnail->move(public_path('images/repos'), $imageName);
-            $repo->thumbnail = 'images/repos/' . $imageName;
-        }
-
-        $repo->save();
-
-        return redirect()->route('profile.index')->with('success', 'Repo created successfully!');
-    }
-
-    public function destroyRepo(\App\Models\Repository $repo)
-    {
-
-        if (auth()->id() !== $repo->user_id) {
-            return back()->with('error', 'you can`t do it !');
-        }
-
-        $repo->delete();
-
-        return back()->with('success', 'Repository deleted succesfully');
-    }
 }
