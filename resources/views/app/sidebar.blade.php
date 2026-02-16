@@ -11,45 +11,62 @@
         <li>
             <a href="{{ route('profile.index') }}" class="text-decoration-none fw-bold text-white">
                 <i class='bi bi-person-gear'></i>
-                <span class="links_name">profile</span>
+                <span class="links_name">{{ __("app.profile") }}</span>
             </a>
-            <span class="tooltip">profile</span>
+            <span class="tooltip">{{ __("app.profile") }}</span>
         </li>
         <li>
             <a href="{{ route('users.index') }}" class="text-decoration-none fw-bold text-white">
                 <i class='bi bi-people'></i>
-                <span class="links_name">Users</span>
+                <span class="links_name">{{ __("app.Users") }}</span>
             </a>
-            <span class="tooltip">Users</span>
+            <span class="tooltip">{{ __("app.Users") }}</span>
         </li>
         @auth
             @if(\App\Models\Admin::where('user_id', auth()->id())->exists())
                 <li>
                     <a href="{{ route('admin.panel') }}" class="text-decoration-none fw-bold text-white">
                         <i class="bi bi-shield-lock-fill fs-4"></i>
-                        <span class="ms-3 nav-text">Admin Panel</span>
+                        <span class="ms-3 nav-text">{{ __("app.Admin Panel") }}</span>
                     </a>
-                    <span class="tooltip">Admin Panel</span>
+                    <span class="tooltip">{{ __("app.Admin Panel") }}</span>
                 </li>
             @endif
         @endauth
+
         <li>
-            <a href="{{ route("home") }}" class="text-decoration-none fw-bold text-white w-100">
-                <i class='bi bi-house'></i>
-                <span class="links_name">HOME</span>
-            </a>
-            <span class="tooltip">HOME</span>
+            <i class='bi bi-house text-white'></i>
+            <span class="links_name text-white">{{ __("app.HOME") }}</span>
+            <span class="tooltip">{{ __("app.HOME") }}</span>
             <i class='bi bi-chevron-down arrow-btn ms-2 p-2' id="drop-btn"></i>
         <li class="nav-item">
             <ul class="sub-menu list-unstyled ps-4 py-2" style="display: none; background: #1d1b31;">
                 <li><a href="{{ route("home") }}"
-                        class="text-white-50 text-decoration-none py-1 d-block small">Repository</a></li>
+                        class="text-white-50 text-decoration-none py-1 d-block small">{{ __("app.Repository") }}</a></li>
                 <li><a href="{{ route("posts.index") }}"
-                        class="text-white-50 text-decoration-none py-1 d-block small">Posts</a>
+                        class="text-white-50 text-decoration-none py-1 d-block small">{{ __("app.Posts") }}</a>
                 </li>
             </ul>
         </li>
+
+        <li>
+            <i class='bi bi-translate text-white'></i>
+            <span class="links_name text-white">{{ __("app.Language") }}</span>
+            <span class="tooltip">{{ app()->getLocale() }}</span>
+            <i class='bi bi-chevron-down arrow-btn ms-2 p-2' id="drop-btn2"></i>
+        <li class="nav-item2">
+            <ul class="sub-menu2 list-unstyled ps-4 py-2" style="display: none; background: #1d1b31;">
+                <li><a href="{{ route("locale", "en") }}"
+                        class="text-white-50 text-decoration-none py-1 d-block small">{{ __("app.English") }}</a></li>
+                <li><a href="{{ route("locale", "tm") }}"
+                        class="text-white-50 text-decoration-none py-1 d-block small">{{ __("app.Türkmençe") }}</a>
+                </li>
+                <li><a href="{{ route("locale", "ru") }}"
+                        class="text-white-50 text-decoration-none py-1 d-block small">{{ __("app.Русский") }}</a>
+                </li>
+            </ul>
         </li>
+
         <li class="profile">
             <div class="profile-details ">
                 <img src="{{ asset(Auth::user()->profile_image) }}" alt="profileImg">

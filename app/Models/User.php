@@ -17,6 +17,19 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+
+    public function getName()
+    {
+        $locale = app()->getLocale();
+
+        if ($locale == 'tm') {
+            return $this->name_tm ?: $this->name;
+        } else if ($locale == 'ru') {
+            return $this->name_ru ?: $this->name;
+        }
+        return $this->name;
+    }
+
     protected $fillable = [
         'username',
         'email',
@@ -25,7 +38,6 @@ class User extends Authenticatable
         'bio',
         'github_url',
     ];
-
     public function getTotalLikesAttribute()
     {
 

@@ -85,8 +85,8 @@
                 <div class="ms-4">
                     <h2 style="color: #00f2fe; margin: 0;">{{ $repo->title }}</h2>
                     <div class="d-flex align-items-center">
-                        <span class="text-white-50 me-2">by {{ $repo->user->username }}</span>
-                        <span class="user-stats">Total Likes: {{ $repo->user->totalLikes }}</span>
+                        <span class="text-white-50 me-2">{{ __("app.by") }} {{ $repo->user->username }}</span>
+                        <span class="user-stats">{{ __("app.Total Likes:") }} {{ $repo->user->totalLikes }}</span>
                     </div>
                 </div>
                 <div style="position: relative;" class="ms-4">
@@ -103,7 +103,7 @@
                         class="btn btn-outline-info d-inline-flex align-items-center gap-2 shadow-sm"
                         style="border-radius: 20px; padding: 8px 20px;">
                         <i class="bi bi-arrow-left"></i>
-                        <span>Back to</span>
+                        <span>{{ __("app.Back to") }}</span>
                     </a>
                 </div>
             </div>
@@ -119,25 +119,25 @@
 
 
         <div class="path-display">
-            <div class="mb-2 text-white-50 small text-uppercase">Project Root Path:</div>
+            <div class="mb-2 text-white-50 small text-uppercase">{{ __("app.Project Root Path:") }}</div>
             <div class="path-text">
                 <i class="bi bi-folder2-open me-2"></i><a href=" {{ asset($repo->repo_path) }}" target="_blank">{{ $repo->repo_path }}</a>
             </div>
         </div>
 
         <div class="description-box mb-3">
-            <h4 style="color: #00f2fe;">About Project</h4>
+            <h4 style="color: #00f2fe;">{{ __("app.About Project") }}</h4>
             <p class="lead text-white-70" style="line-height: 1.8;">{{ $repo->description }}</p>
         </div>
 
         <div class="" style="max-width: 300px;">
-            <h3 style="color: #00f2fe;">Comments ({{ $repo->comments->count() }})</h3>
+            <h3 style="color: #00f2fe;">{{ __("app.Comments") }} ({{ $repo->comments->count() }})</h3>
 
             <form action="{{ route('comment.store', $repo->id) }}" method="POST" class="mb-4">
                 @csrf
                 <textarea name="content" class="form-control neon-input" rows="3" placeholder="Write a comment..."
                     required></textarea>
-                <button type="submit" class="btn btn-info btn-sm mt-2 fw-bold">Post Comment</button>
+                <button type="submit" class="btn btn-info btn-sm mt-2 fw-bold">{{ __("app.Post Comment") }}</button>
             </form>
 
             @foreach($repo->comments as $comment)

@@ -41,17 +41,17 @@
                     style="width: 150px; height: 150px; border-radius: 50%; border: 3px solid #00f2fe; object-fit: cover;">
 
                 <div class="mt-3 text-white-50 small d-flex">
-                    <div>Total Likes: <span class="text-info">{{ $user->total_likes }}</span></div>
+                    <div>{{ __("app.Following") }} <span class="text-info">{{ $user->total_likes }}</span></div>
                     <a href="{{ route('profile.followers', $user->id) }}" class="mx-3 text-decoration-none">
                         <div class="mx-3 text-white-50">
-                            <div class="mx-3">Followers: <span class="text-info"
+                            <div class="mx-3">{{ __("app.Followers") }} <span class="text-info"
                                     id="follower-count">{{ $user->followers->count() }}</span></div>
                         </div>
                     </a>
 
                     <a href="{{ route('profile.following', $user->id) }}" class="text-decoration-none">
                         <div class="text-white-50">
-                            <div>Following: <span class="text-info">{{ $user->followings->count() }}</span></div>
+                            <div>{{ __("app.Following") }} <span class="text-info">{{ $user->followings->count() }}</span></div>
                         </div>
                     </a>
                 </div>
@@ -71,7 +71,7 @@
             @endif
             <button type="button" class="btn btn-danger fw-bold px-3 ms-3" data-bs-toggle="modal"
                 data-bs-target="#reportModal" data-type="user" data-id="{{ $user->id }}">
-                <i class="fas fa-user-slash"></i> Report User
+                <i class="fas fa-user-slash"></i> {{ __("app.Report :") }}
             </button>
         </div>
 
@@ -79,17 +79,17 @@
             <div class="d-flex gap-5 py-3">
                 <div id="tab-repos" class="tab-item active-tab text-white cursor-pointer" onclick="switchTab('repos')">
                     <i class="bi bi-grid-3x3-gap fs-4"></i>
-                    <span class="d-block small fw-bold">REPOS</span>
+                    <span class="d-block small fw-bold">{{ __("app.REPOS") }}</span>
                 </div>
                 <div id="tab-posts" class="tab-item text-secondary cursor-pointer" onclick="switchTab('posts')">
                     <i class="bi bi-collection-play fs-4"></i>
-                    <span class="d-block small fw-bold">POSTS</span>
+                    <span class="d-block small fw-bold">{{ __("app.POSTS") }}</span>
                 </div>
             </div>
         </div>
 
         <div id="content-repos" class="profile-content">
-            <h3 class="text-center text-info mb-4">REPOSITORIES</h3>
+            <h3 class="text-center text-info mb-4">{{ __("app.REPOSITORIES") }}</h3>
             <div class="row">
                 @foreach($repositories as $repo)
                     <div class="col-xl-4 col-md-6 mb-4">
@@ -103,7 +103,7 @@
                                 <div class="repo-overlay d-flex align-items-center justify-content-center">
                                     <a href="{{ route('dashboard.show', $repo->id) }}"
                                         class="btn btn-info btn-sm fw-bold px-4 shadow-sm">
-                                        <i class="bi bi-eye-fill me-1"></i> VIEW PROJECT
+                                        <i class="bi bi-eye-fill me-1"></i> {{ __("app.VIEW PROJECT") }}
                                     </a>
                                 </div>
                             </div>
@@ -135,7 +135,7 @@
                                     <a href="{{ route('dashboard.show', $repo->id) }}"
                                         class="btn btn-info fw-bold px-4 py-2 w-100 mb-2"
                                         style="box-shadow: 0 0 15px rgba(0, 242, 254, 0.5); border-radius: 8px;">
-                                        <i class="bi bi-code-slash me-2"></i> VIEW PROJECT
+                                        <i class="bi bi-code-slash me-2"></i> {{ __("app.VIEW PROJECT") }}
                                     </a>
                                     <form action="{{ route('admin.repo.delete', $repo->id) }}" method="POST"
                                         onsubmit="return confirm('Are you sure?');">
@@ -143,7 +143,7 @@
                                         @method('DELETE')
                                         <button type="submit"
                                             class="btn btn-link text-danger text-decoration-none btn-sm w-100 fw-bold">
-                                            <i class="bi bi-trash3 me-1"></i> Delete Repository
+                                            <i class="bi bi-trash3 me-1"></i> {{ __("app.Delete Repository") }}
                                         </button>
                                     </form>
                                 </div>
@@ -155,7 +155,7 @@
         </div>
 
         <div id="content-posts" class="profile-content d-none">
-            <h3 class="text-center text-info mb-4">POSTS</h3>
+            <h3 class="text-center text-info mb-4">{{ __("app.POSTS") }}</h3>
             <div class="row">
                 @foreach($posts as $post)
 
@@ -174,7 +174,7 @@
                                     <a href="{{ route('posts.show', $post->id) }}"
                                         class="btn btn-outline-info fw-bolder px-3 py-2 ms-3"
                                         style="box-shadow: 0 0 15px rgba(0, 242, 254, 0.5); border-radius: 8px;">
-                                        <i class="bi bi-code-slash me-2"></i> VIEW POST
+                                        <i class="bi bi-code-slash me-2"></i> {{ __("app.VIEW POST") }}
                                     </a>
                                 </div>
 

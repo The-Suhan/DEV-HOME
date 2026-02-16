@@ -42,21 +42,21 @@
                 <h3 class="text-white">{{ $user->username }}</h3>
                 <p class="text-white-50">{{ $user->bio ?? 'No bio available.' }}</p>
                 <a href="{{ $user->github_url }}" target="_blank" class="text-info d-block mb-3">
-                    <i class="bi bi-github"></i> GitHub Profile
+                    <i class="bi bi-github"></i> {{ __("app.GitHub Profile") }}
                 </a>
 
                 <div class="d-flex justify-content-center gap-2">
-                    <a href="{{ route('profile.edit') }}" class="btn btn-sm btn-outline-warning">Edit Profile</a>
+                    <a href="{{ route('profile.edit') }}" class="btn btn-sm btn-outline-warning">{{ __("app.Edit Profile") }}</a>
                     <form action="{{ route('profile.delete') }}" method="POST"
                         onsubmit="return confirm('Are you sure? Everything will be deleted!')">
                         @csrf @method('DELETE')
-                        <button type="submit" class="btn btn-sm btn-outline-danger">Delete Account</button>
+                        <button type="submit" class="btn btn-sm btn-outline-danger">{{ __("app.Delete Account") }}</button>
                     </form>
                     <a href="{{ route('profile.createRepo') }}" class="btn btn-outline-info btn-sm">
-                        <i class="bi bi-plus-circle"></i> Add New Repository
+                        <i class="bi bi-plus-circle"></i> {{ __("app.Add New Repository") }}
                     </a>
                     <a href="{{ route('posts.create') }}" class="btn btn-outline-success btn-sm">
-                        <i class="bi bi-plus-circle"></i> Add New Post
+                        <i class="bi bi-plus-circle"></i> {{ __("app.Add New Post") }}
                     </a>
                 </div>
             </div>
@@ -65,18 +65,18 @@
                 <div class="row text-center mt-5">
                     <div class="col-4">
                         <h2 class="text-info">{{ $user->total_likes }}</h2>
-                        <span class="text-white-50">Total Likes</span>
+                        <span class="text-white-50">{{ __("app.Total Likes") }}</span>
                     </div>
                     <a href="{{ route('profile.followers', $user->id) }}" class="text-decoration-none col-4">
                         <div>
                             <h2 class="text-info">{{ $user->followers->count() }}</h2>
-                            <span class="text-white-50">Followers</span>
+                            <span class="text-white-50">{{ __("app.Followers") }}</span>
                         </div>
                     </a>
                     <a href="{{ route('profile.following', $user->id) }}" class="text-decoration-none col-4">
                         <div>
                             <h2 class="text-info">{{ $user->followings->count() }}</h2>
-                            <span class="text-white-50">Following</span>
+                            <span class="text-white-50">{{ __("app.Following") }}</span>
                         </div>
                     </a>
                 </div>
@@ -87,11 +87,11 @@
             <div class="d-flex gap-5 py-3">
                 <div id="tab-repos" class="tab-item active-tab text-white cursor-pointer" onclick="switchTab('repos')">
                     <i class="bi bi-grid-3x3-gap fs-4"></i>
-                    <span class="d-block small fw-bold">REPOS</span>
+                    <span class="d-block small fw-bold">{{ __("app.REPOS") }}</span>
                 </div>
                 <div id="tab-posts" class="tab-item text-secondary cursor-pointer" onclick="switchTab('posts')">
                     <i class="bi bi-collection-play fs-4"></i>
-                    <span class="d-block small fw-bold">POSTS</span>
+                    <span class="d-block small fw-bold">{{ __("app.POSTS") }}</span>
                 </div>
             </div>
         </div>

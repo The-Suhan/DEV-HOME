@@ -3,8 +3,8 @@
 @section('home-section')
     <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-4 mt-4">
-            <h2 class="text-white fw-bold">ADMIN Management</h2>
-            <a href="{{ route('admin.panel') }}" class="btn btn-outline-light">Back to Panel</a>
+            <h2 class="text-white fw-bold">{{ __("app.ADMIN Management") }}</h2>
+            <a href="{{ route('admin.panel') }}" class="btn btn-outline-light">{{ __("app.Back to Panel") }}</a>
         </div>
         <div class="card bg-dark border-secondary mb-4">
             <div class="card-body">
@@ -35,7 +35,7 @@
                             onsubmit="return confirm('Delete User')">
                             @csrf @method('DELETE')
                             <button type="submit" class="btn btn-outline-danger btn-sm px-4 fw-bold">
-                                <i class="bi bi-trash"></i> DELETE
+                                <i class="bi bi-trash"></i> {{ __("app.delete") }}
                             </button>
                         </form>
                     </div>

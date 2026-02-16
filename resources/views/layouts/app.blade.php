@@ -49,27 +49,27 @@
                     <input type="hidden" name="reportable_type" id="modal-reportable-type">
 
                     <div class="modal-header border-secondary">
-                        <h5 class="modal-title text-warning"><i class="fas fa-exclamation-triangle"></i> Submit a Report
+                        <h5 class="modal-title text-warning"><i class="fas fa-exclamation-triangle"></i>{{ __("app.Submit a Report") }}
                         </h5>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
-                        <p class="small text-muted">Please select the reason for reporting this <span
-                                id="report-type-text">content</span>:</p>
+                        <p class="small text-muted text-white">{{ __("app.Please select the reason for reporting this") }} <span
+                                id="report-type-text">{{ __("app.content") }}</span>:</p>
                         <select name="reason" class="form-select bg-secondary text-white border-0 mb-3" required>
-                            <option value="">Choose a reason...</option>
-                            <option value="Spam">Spam</option>
-                            <option value="Inappropriate Content">Inappropriate Content</option>
-                            <option value="Harassment">Harassment</option>
-                            <option value="Copyright Violation">Copyright Violation</option>
-                            <option value="Other">Other</option>
+                            <option value="">{{ __("app.Choose a reason") }}...</option>
+                            <option value="Spam">{{ __("app.Spam") }}</option>
+                            <option value="Inappropriate Content">{{ __("app.Inappropriate Content") }}</option>
+                            <option value="Harassment">{{ __("app.Harassment") }}</option>
+                            <option value="Copyright Violation">{{ __("app.Copyright Violation") }}</option>
+                            <option value="Other">{{ __("app.Other") }}</option>
                         </select>
                         <textarea name="description" class="form-control bg-secondary text-white border-0"
                             placeholder="Optional details..." rows="3"></textarea>
                     </div>
                     <div class="modal-footer border-secondary">
-                        <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-warning text-dark fw-bold">Send Report</button>
+                        <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">{{ __("app.Cancel") }}</button>
+                        <button type="submit" class="btn btn-warning text-dark fw-bold">{{ __("app.Send Report") }}</button>
                     </div>
                 </form>
             </div>

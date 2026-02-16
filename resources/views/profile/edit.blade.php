@@ -62,8 +62,7 @@
 
     <div class="edit-wrapper">
         <div class="edit-card">
-            <h2 class="text-center mb-4" style="color: #00f2fe; text-transform: uppercase; letter-spacing: 2px;">Edit
-                Profile</h2>
+            <h2 class="text-center mb-4" style="color: #00f2fe; text-transform: uppercase; letter-spacing: 2px;">{{ __("app.Edit Profile") }}</h2>
 
             <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -82,26 +81,26 @@
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">USERNAME</label>
+                    <label class="form-label">{{ __("app.USERNAME") }}</label>
                     <input type="text" name="username" class="form-control neon-input" value="{{ $user->username }}"
                         required>
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">BIO</label>
+                    <label class="form-label">{{ __("app.BIO") }}</label>
                     <textarea name="bio" class="form-control neon-input" rows="3">{{ $user->bio }}</textarea>
                 </div>
 
                 <div class="mb-4">
-                    <label class="form-label">GITHUB URL</label>
+                    <label class="form-label">{{ __("app.GITHUB URL") }}</label>
                     <input type="text" name="github_url" class="form-control neon-input" value="{{ $user->github_url }}"
                         placeholder="https://github.com/yourusername">
                 </div>
  
                 <div class="d-grid gap-2">
                     <button type="submit" class="btn btn-info fw-bold text-dark"
-                        style="box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);">SAVE CHANGES</button>
-                    <a href="{{ route('profile.index') }}" class="btn btn-outline-secondary btn-sm border-0 mt-2">Cancel</a>
+                        style="box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);">{{ __("app.SAVE CHANGES") }}</button>
+                    <a href="{{ route('profile.index') }}" class="btn btn-outline-secondary btn-sm border-0 mt-2">{{ __("app.Cancel") }}</a>
                 </div>
             </form>
         </div>

@@ -56,13 +56,13 @@
                                         <form action="{{ route('user.unfollow', $targetUser->id) }}" method="POST">
                                             @csrf @method('DELETE')
                                             <button class="btn btn-secondary btn-sm rounded-pill px-3"
-                                                style="font-size: 12px;">Following</button>
+                                                style="font-size: 12px;">{{ __("app.Following") }}</button>
                                         </form>
                                     @else
                                         <form action="{{ route('user.follow', $targetUser->id) }}" method="POST">
                                             @csrf
                                             <button class="btn btn-success btn-sm rounded-pill px-3 fw-bold" style="font-size: 12px;">
-                                                <i class="bi bi-person-plus-fill"></i> Follow Back
+                                                <i class="bi bi-person-plus-fill"></i> {{ __("app.Follow Back") }}
                                             </button>
                                         </form>
                                     @endif
@@ -73,7 +73,7 @@
                                     <form action="{{ route('profile.deleteFollow', $item->id) }}" method="POST">
                                         @csrf @method('DELETE')
                                         <button class="btn btn-outline-danger btn-sm rounded-pill px-3"
-                                            style="font-size: 12px;">Remove</button>
+                                            style="font-size: 12px;">{{ __("app.Remove") }}</button>
                                     </form>
                                 @endif
                             </div>

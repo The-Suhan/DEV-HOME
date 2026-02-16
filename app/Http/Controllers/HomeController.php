@@ -56,4 +56,12 @@ class HomeController extends Controller
         return redirect()->route('profile.index')->with('success', 'Repo created successfully!');
     }
 
+    public function locale($locale)
+    {
+        $locale = in_array($locale, ['tm', 'ru']) ? $locale : 'en';
+        session()->put('locale', $locale);
+
+        return redirect()->back();
+    }
+
 }

@@ -9,7 +9,7 @@ class ReportController extends Controller
 {
     public function index()
     {
-        $reports = Report::with(['reporter', 'reportable'])->latest()->get();
+        $reports = Report::with(['reporter', 'reportable','description'])->latest()->get();
         return view('admin.reports.index', compact('reports'));
     }
 

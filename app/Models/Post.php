@@ -27,4 +27,17 @@ class Post extends Model
     {
         return $this->hasMany(\App\Models\Comment::class);
     }
+    
+    public function getName()
+    {
+        $locale = app()->getLocale();
+
+        if ($locale == 'tm') {
+            return $this->name_tm ?: $this->name;
+        } else if ($locale == 'ru') {
+            return $this->name_ru ?: $this->name;
+        }
+        return $this->name;
+    }
+
 }

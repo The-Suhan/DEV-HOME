@@ -3,8 +3,8 @@
 @section('home-section')
     <div class="container py-5">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="text-white fw-bold">Post Management</h2>
-            <a href="{{ route('admin.panel') }}" class="btn btn-outline-light">Back to Panel</a>
+            <h2 class="text-white fw-bold">{{ __("app.Post Management") }}</h2>
+            <a href="{{ route('admin.panel') }}" class="btn btn-outline-light">{{ __("app.Back to Panel") }}</a>
         </div>
         <div class="card bg-dark border-secondary mb-4">
             <div class="card-body">
@@ -26,20 +26,20 @@
                                 style="width: 100px; height: 100px; object-fit: cover;">
 
                             <div class="flex-grow-1">
-                                <h5 class="mb-1 text-info">By: {{ $post->user->username }}</h5>
+                                <h5 class="mb-1 text-info">{{ __("app.By:") }} {{ $post->user->username }}</h5>
                                 <p class="small text-white-50 mb-0">{{ Str::limit($post->caption, 100) }}</p>
-                                <small class="text-secondary">Created at: {{ $post->created_at->format('d.m.Y H:i') }}</small>
+                                <small class="text-secondary">{{ __("app.Created at:") }} {{ $post->created_at->format('d.m.Y H:i') }}</small>
                             </div>
-                            <a href="{{ route('posts.show', $post->id) }}" class="btn btn-outline-info fw-bolder px-3 py-2 ms-3"
+                            <a href="{{ route('posts.show', $post->id) }}" class="btn btn-outline-info fw-bolder px-2 py-2 ms-3"
                                 style="box-shadow: 0 0 15px rgba(0, 242, 254, 0.5); border-radius: 8px;">
-                                <i class="bi bi-code-slash me-2"></i> VIEW POST
+                                <i class="bi bi-code-slash me-2"></i> {{ __("app.VIEW POST") }}
                             </a>
                             <form action="{{ route('admin.post.delete', $post->id) }}" method="POST"
                                 onsubmit="return confirm('Are you sure?')">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-outline-danger">
-                                    <i class="bi bi-trash"></i> Delete Post
+                                    <i class="bi bi-trash"></i>{{ __("app.Delete Post") }}
                                 </button>
                             </form>
                         </div>

@@ -5,12 +5,12 @@
         <div class="">
             <div class="d-flex justify-content-between align-items-end mb-5">
                 <div>
-                    <h1 class="display-5 fw-bold text-white mb-0">FOR YOU <span style="color: #00f2fe;">PAGE </span></h1>
-                    <p class="text-white-50">See what's happening in the world.</p>
+                    <h1 class="display-5 fw-bold text-white mb-0">{{ __("app.FOR YOU") }} <span style="color: #00f2fe;">{{ __("app.PAGE") }} </span></h1>
+                    <p class="text-white-50">{{ __("app.See what`s happening in the world.") }}</p>
                 </div>
                 <div class="text-end">
                     <span class="badge rounded-pill bg-dark border border-info px-3 py-2">
-                        <i class="bi me-1"></i> {{ $posts->count() }} Posts Online
+                        <i class="bi me-1"></i> {{ $posts->count() }} {{ __("app.Posts Online") }}
                     </span>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                                 <a href="{{ route('posts.show', $post->id) }}"
                                     class="btn btn-outline-info fw-bolder px-3 py-2 ms-3"
                                     style="box-shadow: 0 0 15px rgba(0, 242, 254, 0.5); border-radius: 8px;">
-                                    <i class="bi bi-code-slash me-2"></i> VIEW POST
+                                    <i class="bi bi-code-slash me-2"></i> {{ __("app.VIEW POST") }}
                                 </a>
                                 @auth
                                     @if(auth()->user()->id === $post->user_id)
@@ -52,7 +52,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-outline-danger ms-5 px-3 py-2">
-                                                <i class="fas fa-trash"></i> Delete
+                                                <i class="fas fa-trash"></i> {{ __("app.Delete") }}
                                             </button>
                                         </form>
                                     @endif
@@ -93,7 +93,7 @@
                                 <i class="bi bi-chat-left-dots-fill ms-3 me-1"></i> {{ $post->comments->count() }}
                                 <button type="button" class="ms-4 btn btn-sm btn-outline-danger shadow-sm" data-bs-toggle="modal"
                                     data-bs-target="#reportModal" data-type="post" data-id="{{ $post->id }}">
-                                    <i class="fas fa-flag"></i> Report Post
+                                    <i class="fas fa-flag"></i> {{ __("app.Report Post") }}
                                 </button>
                             </div>
                             <p class="card-text"><span

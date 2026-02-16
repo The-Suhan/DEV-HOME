@@ -7,12 +7,12 @@
                 class="btn btn-outline-info d-inline-flex align-items-center gap-2 shadow-sm"
                 style="border-radius: 20px; padding: 8px 20px;">
                 <i class="bi bi-arrow-left"></i>
-                <span>Back to</span>
+                <span>{{ __("app.Back to") }}</span>
             </a>
             <button type="button" class="ms-5 btn btn-lg btn-outline-danger shadow-sm" data-bs-toggle="modal"
                 data-bs-target="#reportModal" data-type="post" data-id="{{ $post->id }}"
                 style="border-radius: 20px;">
-                <i class="fas fa-flag"></i> Report Post
+                <i class="fas fa-flag"></i> {{ __("app.Report Post") }}
             </button>
         </div>
         <div class="row g-0 bg-dark rounded-4 shadow-lg overflow-hidden border border-secondary">
@@ -48,7 +48,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-outline-danger btn-sm">
-                                    <i class="fas fa-trash"></i> Delete
+                                    <i class="fas fa-trash"></i> {{ __("app.Delete") }}
                                 </button>
                             </form>
                         @endif
@@ -82,7 +82,7 @@
                             <input type="text" name="content"
                                 class="form-control bg-transparent border-secondary text-white small"
                                 placeholder="Add a comment...">
-                            <button class="btn btn-info text-dark fw-bold px-3" type="submit">Post</button>
+                            <button class="btn btn-info text-dark fw-bold px-3" type="submit">{{ __("app.Post") }}</button>
                         </div>
                     </form>
                     <div class="comments-list mt-4">

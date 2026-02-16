@@ -18,4 +18,16 @@ class Subscription extends Model
     {
         return $this->belongsTo(User::class, 'following_id');
     }
+    public function getName()
+    {
+        $locale = app()->getLocale();
+
+        if ($locale == 'tm') {
+            return $this->name_tm ?: $this->name;
+        } else if ($locale == 'ru') {
+            return $this->name_ru ?: $this->name;
+        }
+        return $this->name;
+    }
+
 }
