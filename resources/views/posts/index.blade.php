@@ -5,7 +5,8 @@
         <div class="">
             <div class="d-flex justify-content-between align-items-end mb-5">
                 <div>
-                    <h1 class="display-5 fw-bold text-white mb-0">{{ __("app.FOR YOU") }} <span style="color: #00f2fe;">{{ __("app.PAGE") }} </span></h1>
+                    <h1 class="display-5 fw-bold text-white mb-0">{{ __("app.FOR YOU") }} <span
+                            style="color: #00f2fe;">{{ __("app.PAGE") }} </span></h1>
                     <p class="text-white-50">{{ __("app.See what`s happening in the world.") }}</p>
                 </div>
                 <div class="text-end">
@@ -26,6 +27,26 @@
                     </div>
                 </div>
             </div>
+            <form id="filterForm" action="{{ route('posts.index') }}" method="GET" class="mb-4">
+                <div class="row justify-content-center">
+                    <div class="col-md-8 col-lg-6">
+                        <div class="shadow-lg">
+                            <select name="type"
+                                class="form-select bg-dark text-info border-secondary shadow-none w-100 py-2"
+                                onchange="this.form.submit()"
+                                style="border-radius: 15px; border: 1px solid #00f2fe; cursor: pointer;">
+                                <option value="" class="text-white">{{ __('app.ALL POSTS') }}</option>
+                                <option value="image" {{ request('type') == 'image' ? 'selected' : '' }} class="text-white">
+                                    📸 {{ __('app.ONLY PHOTOS') }}
+                                </option>
+                                <option value="video" {{ request('type') == 'video' ? 'selected' : '' }} class="text-white">
+                                    🎥 {{ __('app.ONLY VIDEOS') }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
         @foreach($posts as $post)
             <div class="row justify-content-center">
@@ -33,8 +54,8 @@
                     <div class="card bg-dark text-white mb-4 border-secondary rounded-4 shadow">
                         <div class="card-header d-flex align-items-center justify-content-between bg-transparent border-0 py-3">
                             <div class="d-flex align-items-center">
-                                <img src="{{ asset($post->user->profile_image) }}" class="rounded-circle border border-info"
-                                    width="45" height="45" style="object-fit: cover;">
+                                <img src="{{ asset('storage/' . $post->user->profile_image) }}"
+                                    class="rounded-circle border border-info" width="45" height="45" style="object-fit: cover;">
                                 <div class="ms-3">
                                     <h6 class="mb-0 fw-bold">{{ $post->user->username }}</h6>
                                     <small class="text-white-50 small text-uppercase"
@@ -71,11 +92,11 @@
                         <div class="post-media bg-black">
                             @if($post->type == 'image')
                                 <div class="post-media bg-black overflow-hidden" style="height: 500px;"> <img
-                                        src="{{ asset($post->media_path) }}" class="w-100 h-100 post-img-hover"
+                                        src="{{ asset('storage/' . $post->media_path) }}" class="w-100 h-100 post-img-hover"
                                         style="object-fit: cover; transition: transform 0.4s ease;">
                                 </div>
                             @else
-                                <video src="{{ asset($post->media_path) }}" class="w-100" controls
+                                <video src="{{ asset('storage/' . $post->media_path) }}" class="w-100" controls
                                     style="max-height: 80vh;"></video>
                             @endif
                         </div>
@@ -91,8 +112,9 @@
                                     {{ $post->likes()->count() }}
                                 </span>
                                 <i class="bi bi-chat-left-dots-fill ms-3 me-1"></i> {{ $post->comments->count() }}
-                                <button type="button" class="ms-4 btn btn-sm btn-outline-danger shadow-sm" data-bs-toggle="modal"
-                                    data-bs-target="#reportModal" data-type="post" data-id="{{ $post->id }}">
+                                <button type="button" class="ms-4 btn btn-sm btn-outline-danger shadow-sm"
+                                    data-bs-toggle="modal" data-bs-target="#reportModal" data-type="post"
+                                    data-id="{{ $post->id }}">
                                     <i class="fas fa-flag"></i> {{ __("app.Report Post") }}
                                 </button>
                             </div>

@@ -30,28 +30,29 @@ class HomeController extends Controller
         return view('dashboard.create_repo');
     }
 
+
+
     public function storeRepo(Request $request)
     {
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'repo_path' => 'required|string',
-            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'repo_file' => 'required|file|max:50000',
+            'thumbnail' => 'required|image|max:5000',
         ]);
 
-        $repo = new \App\Models\Repository();
-        $repo->user_id = auth()->id();
-        $repo->title = $request->title;
-        $repo->description = $request->description;
-        $repo->repo_path = $request->repo_path;
+        if ($request->hasFile('repo_file') && $request->hasFile('thumbnail')) {
+            $repoPath = $request->file('repo_file')->store('repos/repo_paths', 'public');
+            $thumbPath = $request->file('thumbnail')->store('repos/repo_thumbnail', 'public');
 
-        if ($request->hasFile('thumbnail')) {
-            $imageName = time() . '.' . $request->thumbnail->extension();
-            $request->thumbnail->move(public_path('repos'), $imageName);
-            $repo->thumbnail = 'repos/' . $imageName;
+            \App\Models\Repository::create([
+                'user_id' => auth()->id(),
+                'repo_path' => $repoPath,
+                'thumbnail' => $thumbPath,
+                'title' => $request->title,
+                'description' => $request->description,
+            ]);
         }
-
-        $repo->save();
 
         return redirect()->route('profile.index')->with('success', 'Repo created successfully!');
     }

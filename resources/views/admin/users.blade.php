@@ -23,7 +23,7 @@
                 <div class="col-12 mb-3">
                     <div class="neon-card d-flex align-items-center justify-content-between p-3" style="border-color: #ff4757;">
                         <div class="d-flex align-items-center">
-                            <img src="{{ asset($user->profile_image) }}"
+                            <img src="{{ asset('storage/' . $user->profile_image) }}"
                                 style="width: 60px; height: 60px; border-radius: 50%; border: 2px solid #ff4757;">
                             <div class="ms-4">
                                 <h5 class="text-white mb-0">{{ $user->username }}</h5>

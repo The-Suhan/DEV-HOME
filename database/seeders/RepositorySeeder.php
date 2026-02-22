@@ -15,23 +15,23 @@ class RepositorySeeder extends Seeder
         Repository::create([
             "user_id" => 1,
             'title' => "instagram clone",
-            'description' => "Help with you",
-            'thumbnail' => 'images/repojpg.jpg',
-            'repo_path' => 'paths/styles.css',
+            'description' => "A full featured Instagram clone with Laravel Reverb",
+            'thumbnail' => 'repos/repo_thumbnail/repojpg.jpg',
+            'repo_path' => 'repos/repo_paths/styles.zip',
         ]);
         Repository::create([
             "user_id" => 2,
             'title' => "tik tok clone",
             'description' => "Help with you",
-            'thumbnail' => 'images/repojpg.jpg',
-            'repo_path' => 'paths/index.blade.php',
+            'thumbnail' => 'repos/repo_thumbnail/repojpg.jpg',
+            'repo_path' => 'repos/repo_paths/script.zip',
         ]);
         Repository::create([
             "user_id" => 3,
             'title' => "instagram front-end",
             'description' => "Help with you",
-            'thumbnail' => 'images/repojpg.jpg',
-            'repo_path' => 'paths/index.html',
+            'thumbnail' => 'repos/repo_thumbnail/repojpg.jpg',
+            'repo_path' => 'repos/repo_paths/index.zip',
         ]);
     }
 }

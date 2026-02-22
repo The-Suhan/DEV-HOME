@@ -8,9 +8,15 @@ use App\Models\Post;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::with(['user',])->latest()->get();
+        $query = \App\Models\Post::with('user')->latest();
+
+        if ($request->filled('type')) {
+            $query->where('type', $request->type);
+        }
+
+        $posts = $query->get();
 
         return view('posts.index', compact('posts'));
     }
@@ -36,21 +42,20 @@ class PostController extends Controller
 
         if ($request->hasFile('media')) {
             $file = $request->file('media');
-            $fileName = time() . '.' . $file->getClientOriginalExtension();
 
-            $folder = ($request->type === 'video') ? 'videos' : 'postIMG';
-            $file->move(public_path($folder), $fileName);
-            $path = $folder . '/' . $fileName;
+            $folder = ($request->type === 'video') ? 'posts/videos' : 'posts/images';
+
+            $path = $file->store($folder, 'public');
 
             \App\Models\Post::create([
                 'user_id' => auth()->id(),
                 'media_path' => $path,
                 'caption' => $request->caption,
-                'type' => $request->type
+                'type' => $request->type,
             ]);
-
-            return redirect()->route('profile.index')->with('success', 'Post shared!');
         }
+
+        return redirect()->route('profile.index')->with('success', 'Post shared!');
     }
     public function destroy(Post $post)
     {
@@ -60,6 +65,6 @@ class PostController extends Controller
 
         $post->delete();
 
-        return redirect()->route('posts.index')->with('success', 'Post deleted succesfully');
+        return redirect()->back()->with('success', 'Post deleted succesfully');
     }
 }

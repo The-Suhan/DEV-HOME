@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 
 
+
 class ProfileController extends Controller
 {
 
@@ -66,12 +67,15 @@ class ProfileController extends Controller
         return redirect('/register')->with('success', 'Your account has been successfully deleted');
     }
 
+
+
+
     public function update(Request $request)
     {
         $user = Auth::user();
 
         $request->validate([
-            'username' => 'required|string|max:255|unique:users,username,' . $user->id,
+            'username' => 'required|nullable|string|max:255|unique:users,username,' . $user->id,
             'bio' => 'nullable|string|max:500',
             'github_url' => 'nullable|url',
             'profile_image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
@@ -82,16 +86,16 @@ class ProfileController extends Controller
         $user->github_url = $request->github_url;
 
         if ($request->hasFile('profile_image')) {
-            $imageName = time() . '.' . $request->profile_image->extension();
-            $request->profile_image->move(public_path('images/profiles'), $imageName);
-            $user->profile_image = 'images/profiles/' . $imageName;
+
+            $path = $request->file('profile_image')->store('users/profile_photo', 'public');
+
+            $user->profile_image = $path;
         }
 
         $user->save();
 
         return redirect()->route('profile.index')->with('success', 'Profile updated!');
     }
-
 
 
 }

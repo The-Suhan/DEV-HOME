@@ -146,6 +146,9 @@ return [
     'MY REPOSITORIES' => "МОИ РЕПОЗИТОРИИ",
     'Delete Repository' => "Удалить репозиторий",
     'MY POSTS' => "МОИ ПОСТЫ",
+    'ALL POSTS' => "ВСЕ ПОСТЫ",
+    'ONLY PHOTOS' => "ТОЛЬКО ФОТО",
+    'ONLY VIDEOS' => "ТОЛЬКО ВИДЕО",
 
     // profile bolimi full
 ];

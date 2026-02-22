@@ -16,19 +16,19 @@ class UserSeeder extends Seeder
             "username" => "Suxan",
             'email' => "suxanoff17@gmail.com",
             'password' => "password",
-            'profile_image' => 'images/default.jpg',
+            'profile_image' => 'users/profile_photo/default.jpg',
         ]);
         User::create([
             "username" => "Han",
             'email' => "handurdy@gmail.com",
             'password' => "password",
-            'profile_image' => 'images/default.jpg',
+            'profile_image' => 'users/profile_photo/default.jpg',
         ]);
         User::create([
             "username" => "Maisa",
             'email' => "maisaShad@gmail.com",
             'password' => "password",
-            'profile_image' => 'images/default.jpg',
+            'profile_image' => 'users/profile_photo/default.jpg',
         ]);
     }
 }

@@ -41,7 +41,7 @@
                         <div class="card-body d-flex align-items-center text-white">
                             <a href="{{ route('users.show', $targetUser->id) }}"
                                 class="d-flex align-items-center gap-3 text-decoration-none text-white">
-                                <img src="{{ $targetUser->profile_image ? asset($targetUser->profile_image) : asset('default-avatar.png') }}"
+                                <img src="{{ $targetUser->profile_image ? asset('storage/' . $targetUser->profile_image) : asset('storage/' . 'default-avatar.png') }}"
                                     class="rounded-circle border border-info"
                                     style="width: 50px; height: 50px; object-fit: cover;">
                                 <div>

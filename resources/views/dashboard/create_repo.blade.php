@@ -3,7 +3,8 @@
 @section('home-section')
     <div class="" style="max-width: 600px;margin: auto;">
         <div class="edit-card">
-            <h2 class="text-center mb-4" style="color: #00f2fe; text-transform: uppercase;">{{ __("app.Create New Repo") }}</h2>
+            <h2 class="text-center mb-4" style="color: #00f2fe; text-transform: uppercase;">{{ __("app.Create New Repo") }}
+            </h2>
 
             <form action="{{ route('profile.storeRepo') }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -20,9 +21,8 @@
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label h4" style="color: #00f2fe;">{{ __("app.ROOT PATH") }}</label>
-                    <input type="text" name="repo_path" class="form-control neon-input" placeholder="C:/Projects/MyWebSite"
-                        required>
+                    <label class="form-label h4" style="color: #00f2fe;">{{ __('app.PROJECT FILE (.ZIP)') }}</label>
+                    <input type="file" name="repo_file" class="form-control neon-input" required>
                 </div>
 
                 <div class="mb-4">

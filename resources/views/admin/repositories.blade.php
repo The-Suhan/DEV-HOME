@@ -22,7 +22,7 @@
                 <div class="col-12 mb-3">
                     <div class="card bg-dark border-secondary shadow">
                         <div class="card-body d-flex align-items-center gap-4 text-white">
-                            <a href="{{ asset($repo->repo_path) }}" class="rounded shadow-sm"
+                            <a href="{{ asset('storage/' . $repo->repo_path) }}" class="rounded shadow-sm"
                                 style="width: 100px; height: 100px; object-fit: cover;">
                             </a>
                             <div class="flex-grow-1">

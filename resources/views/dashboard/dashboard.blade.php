@@ -33,7 +33,7 @@
                     <div class="neon-card h-100 d-flex flex-column"
                         style="border-radius: 15px; overflow: hidden; background: rgba(13, 31, 45, 0.8);">
                         <div class="repo-thumb" style="height: 180px; overflow: hidden; position: relative;">
-                            <img src="{{ asset($repo->thumbnail ?? 'images/default-repo.png') }}"
+                            <img src="{{ asset('storage/' . $repo->thumbnail) }}"
                                 class="w-100 h-100 object-fit-cover">
                             <div class="repo-overlay d-flex align-items-center justify-content-center">
                                 <a href="{{ route('dashboard.show', $repo->id) }}" class="btn btn-info btn-sm fw-bold px-4">{{ __("app.VIEW CODE") }}</a>
@@ -42,7 +42,7 @@
 
                         <div class="p-4 d-flex flex-column flex-grow-1">
                             <div class="d-flex align-items-center mb-2">
-                                <img src="{{ asset($repo->user->profile_image) }}" class="rounded-circle border border-info"
+                                <img src="{{ asset('storage/' . $repo->user->profile_image) }}" class="rounded-circle border border-info"
                                     style="width: 25px; height: 25px;">
                                 <span class="ms-2 text-white-50 small">{{ $repo->user->username }}</span>
                             </div>

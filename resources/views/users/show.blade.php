@@ -37,7 +37,7 @@
     <div class="container-xl">
         <div class="row align-items-center mb-5">
             <div class="col-md-3 text-center">
-                <img src="{{ asset($user->profile_image) }}"
+                <img src="{{ asset('storage/' . $user->profile_image) }}"
                     style="width: 150px; height: 150px; border-radius: 50%; border: 3px solid #00f2fe; object-fit: cover;">
 
                 <div class="mt-3 text-white-50 small d-flex">
@@ -97,7 +97,7 @@
                             style="border-radius: 12px; overflow: hidden; background: rgba(13, 31, 45, 0.7); border: 1px solid rgba(0, 242, 254, 0.2);">
 
                             <div class="repo-thumb position-relative" style="height: 160px; overflow: hidden;">
-                                <img src="{{ asset($repo->thumbnail ?? 'images/repoimg.jpg') }}"
+                                <img src="{{ asset('storage/' . $repo->thumbnail) }}"
                                     class="w-100 h-100 object-fit-cover transition-all">
 
                                 <div class="repo-overlay d-flex align-items-center justify-content-center">
@@ -164,7 +164,7 @@
                             <div
                                 class="card-header d-flex align-items-center justify-content-between bg-transparent border-0 py-3">
                                 <div class="d-flex align-items-center">
-                                    <img src="{{ asset($post->user->profile_image) }}" class="rounded-circle border border-info"
+                                    <img src="{{ asset('storage/' . $post->user->profile_image) }}" class="rounded-circle border border-info"
                                         width="45" height="45" style="object-fit: cover;">
                                     <div class="ms-3">
                                         <h6 class="mb-0 fw-bold">{{ $post->user->username }}</h6>
@@ -190,11 +190,11 @@
                             <div class="post-media bg-black">
                                 @if($post->type == 'image')
                                     <div class="post-media bg-black overflow-hidden" style="height: 500px;"> <img
-                                            src="{{ asset($post->media_path) }}" class="w-100 h-100 post-img-hover"
+                                            src="{{ asset('storage/' . $post->media_path) }}" class="w-100 h-100 post-img-hover"
                                             style="object-fit: cover; transition: transform 0.4s ease;">
                                     </div>
                                 @else
-                                    <video src="{{ asset($post->media_path) }}" class="w-100" controls
+                                    <video src="{{ asset('storage/' . $post->media_path) }}" class="w-100" controls
                                         style="max-height: 80vh;"></video>
                                 @endif
                             </div>

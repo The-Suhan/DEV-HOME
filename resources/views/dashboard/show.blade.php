@@ -79,7 +79,7 @@
         <div class="repo-header d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
                 <div style="position: relative;">
-                    <img src="{{ asset($repo->user->profile_image) }}"
+                    <img src="{{ asset('storage/' . $repo->user->profile_image) }}"
                         style="width: 60px; height: 60px; border-radius: 50%; border: 2px solid #00f2fe; object-fit: cover;">
                 </div>
                 <div class="ms-4">
@@ -121,7 +121,7 @@
         <div class="path-display">
             <div class="mb-2 text-white-50 small text-uppercase">{{ __("app.Project Root Path:") }}</div>
             <div class="path-text">
-                <i class="bi bi-folder2-open me-2"></i><a href=" {{ asset($repo->repo_path) }}" target="_blank">{{ $repo->repo_path }}</a>
+                <i class="bi bi-folder2-open me-2"></i><a href="{{ asset('storage/' . $repo->repo_path) }}" download>Download Project</a>
             </div>
         </div>
 
@@ -144,7 +144,7 @@
                 <div class="neon-card p-3 mb-3" style="border-left: 3px solid #00f2fe;">
                     <a href="{{ route('users.show', $user->id) }}" class="text-decoration-none">
                         <div class="d-flex align-items-center mb-2">
-                            <img src="{{ asset($comment->user->profile_image) }}"
+                            <img src="{{ asset('storage/' . $comment->user->profile_image) }}"
                                 style="width: 30px; height: 30px; border-radius: 50%;">
                             <strong class="ms-2 text-white">{{ $comment->user->username }}</strong>
                             <small class="ms-auto text-white-50">{{ $comment->created_at->diffForHumans() }}</small>

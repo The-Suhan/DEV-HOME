@@ -17,15 +17,10 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => \App\Models\User::all()->random()->id,
-            'media_path' => fake()->randomElement([
-                'images/2.jpg',
-                'images/3.jpg',
-                'images/4.jpg',
-                'images/6.jpg',
-            ]),
-            'type' => fake()->randomElement(['image']),
-            'caption' => fake()->paragraph(10),
+            'user_id' => \App\Models\User::all()->random()->id, 
+            'media_path' => 'posts/images/' . fake()->randomElement(['2.jpg', '3.jpg', '4.jpg', '6.jpg']), 
+            'type' => 'image', 
+            'caption' => fake()->paragraph(2), 
         ];
     }
 }

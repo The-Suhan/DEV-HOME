@@ -27,7 +27,7 @@ class UserFactory extends Factory
             'username' => fake()->userName(),
             'email' => fake()->unique()->safeEmail(),
             'password' => bcrypt('password'), 
-            'profile_image' => 'images/default.jpg', 
+            'profile_image' => 'users/profile_photo/default.jpg', 
             'bio' => fake()->sentence(), 
         ];
     }

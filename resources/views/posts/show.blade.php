@@ -18,17 +18,17 @@
         <div class="row g-0 bg-dark rounded-4 shadow-lg overflow-hidden border border-secondary">
             <div class="col-lg-8 bg-black d-flex align-items-center justify-content-center" style="min-height: 500px;">
                 @if($post->type == 'image')
-                    <img src="{{ asset($post->media_path) }}" class="img-fluid w-100 h-100"
+                    <img src="{{ asset('storage/' . $post->media_path) }}" class="img-fluid w-100 h-100"
                         style="max-height: 89vh; object-fit: cover;" alt="Post Image">>
                 @else
-                    <video src="{{ asset($post->media_path) }}" class="w-100" controls style="max-height: 80vh;"></video>
+                    <video src="{{ asset('storage/' . $post->media_path) }}" class="w-100" controls style="max-height: 80vh;"></video>
                 @endif
             </div>
             <div class="col-lg-4 d-flex flex-column bg-dark border-start border-secondary">
 
                 <div class="p-3 border-bottom border-secondary d-flex align-items-center justify-content-between">
                     <div class="d-flex align-items-center">
-                        <img src="{{ asset($post->user->profile_image) }}" class="rounded-circle border border-info"
+                        <img src="{{ asset('storage/' . $post->user->profile_image) }}" class="rounded-circle border border-info"
                             width="40" height="40" style="object-fit: cover;">
                         <div class="ms-3">
                             <h6 class="mb-0 fw-bold text-white">{{ $post->user->username }}</h6>
@@ -89,7 +89,7 @@
                         @foreach($post->comments as $comment)
                             <a href="{{ route('users.show', $comment->user->id) }}" class="text-decoration-none">
                                 <div class="d-flex mb-3 align-items-start neon-card ">
-                                    <img src="{{ asset($comment->user->profile_image ?? 'images/default.jpg') }}"
+                                    <img src="{{ asset('storage/' . $comment->user->profile_image) }}"
                                         class="rounded-circle me-2" width="35" height="35">
                                     <div class="bg-secondary bg-opacity-25 p-2 rounded w-100">
                                         <h6 class="mb-1 text-info small">{{ $comment->user->username }}</h6>

@@ -22,7 +22,7 @@
                 <div class="col-12 mb-3">
                     <div class="card bg-dark border-secondary shadow">
                         <div class="card-body d-flex align-items-center gap-4 text-white">
-                            <img src="{{ asset($post->media_path) }}" class="rounded shadow-sm"
+                            <img src="{{ asset('storage/' . $post->media_path) }}" class="rounded shadow-sm"
                                 style="width: 100px; height: 100px; object-fit: cover;">
 
                             <div class="flex-grow-1">

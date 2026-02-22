@@ -18,12 +18,11 @@ class RepositoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::pluck('id')->random(),
+            'user_id' => \App\Models\User::all()->random()->id,
+            'repo_path' => 'repos/repo_paths/' . fake()->randomElement(['index.zip', 'script.zip', 'styles.zip']),
+            'thumbnail' => 'repos/repo_thumbnail/repojpg.jpg',
             'title' => fake()->sentence(3),
             'description' => fake()->paragraph(10),
-            'thumbnail' => 'images/repojpg.jpg',
-            'repo_path' => fake()->randomElement(['paths/index.html', 'paths/index.blade.php', 'paths/index.php', 'paths/styles.css',
-             'paths/script.js',]),
             'is_public' => true,
         ];
     }

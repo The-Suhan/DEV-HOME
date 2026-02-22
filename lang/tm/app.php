@@ -126,7 +126,10 @@ return [
     'Русский' => "Rusça",
 
     //posts folder full
-
+    
+    'ALL POSTS' => "ÄHLI POSTLAR",
+    'ONLY PHOTOS' => "DIŇE SURATLAR",
+    'ONLY VIDEOS' => "DIŇE WIDEOLAR",
     'Edit Profile' => "Profili üýtget",
     'USERNAME' => "ULANYJY ADY",
     'BIO' => "ÖZÜŇ BARADA",

@@ -22,6 +22,9 @@ return [
 
     // about us yeri 
 
+    'ALL POSTS' => "ALL POSTS",
+    'ONLY PHOTOS' => "ONLY PHOTOS",
+    'ONLY VIDEOS' => "ONLY VIDEOS",
     'ADMIN Management' => "ADMIN Management",
     'Back to Panel' => "Back to Panel",
     'delete' => "delete",
